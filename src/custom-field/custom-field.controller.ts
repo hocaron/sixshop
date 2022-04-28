@@ -2,33 +2,41 @@ import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common'
 import {CustomFieldService} from './custom-field.service';
 import {CreateCustomFieldDto} from './dto/create-custom-field.dto';
 import {UpdateCustomFieldDto} from './dto/update-custom-field.dto';
+import {ApiTags} from '@nestjs/swagger';
+import {docs} from './custom-field.docs';
 
+@ApiTags('custom-field')
 @Controller('custom-field')
 export class CustomFieldController {
   constructor(private readonly customFieldService: CustomFieldService) {}
 
   @Post()
-  create(@Body() createCustomFieldDto: CreateCustomFieldDto) {
-    return this.customFieldService.create(createCustomFieldDto);
+  @docs.createCustomField('사용자 정의 필드 생성')
+  createCustomField(@Body() createCustomFieldDto: CreateCustomFieldDto) {
+    return this.customFieldService.createCustomField(createCustomFieldDto);
   }
 
   @Get()
-  findAll() {
-    return this.customFieldService.findAll();
+  @docs.getAllCustomField('모든 사용자 정의 필드 조회')
+  getAllCustomField() {
+    return this.customFieldService.getAllCustomField();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.customFieldService.findOne(+id);
+  @docs.getCustomField('ID로 사용자 정의 필드 조회')
+  getCustomField(@Param('id') id: string) {
+    return this.customFieldService.getCustomField(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCustomFieldDto: UpdateCustomFieldDto) {
-    return this.customFieldService.update(+id, updateCustomFieldDto);
+  @docs.updateCustomField('ID로 사용자 정의 필드 정보 업데이트')
+  updateCustomField(@Param('id') id: string, @Body() updateCustomFieldDto: UpdateCustomFieldDto) {
+    return this.customFieldService.updateCustomField(id, updateCustomFieldDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.customFieldService.remove(+id);
+  @docs.removeCustomField('ID로 사용자 정의 필드 삭제')
+  removeCustomField(@Param('id') id: string) {
+    return this.customFieldService.removeCustomField(id);
   }
 }
