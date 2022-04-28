@@ -1,6 +1,7 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import {Document} from 'mongoose';
+import {Customer} from 'src/customer/schemas/customer.schema';
 import {CustomField} from './../../custom-field/schemas/custom-field.schema';
 
 export type CustomFieldValueDocument = CustomFieldValue & Document;
@@ -13,8 +14,8 @@ export class CustomFieldValue {
   @Prop({type: mongoose.Schema.Types.Mixed})
   value: any;
 
-  @Prop()
-  customerId: string;
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Customer'})
+  customerId: Customer;
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'})
   customField: CustomField;

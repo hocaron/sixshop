@@ -4,11 +4,11 @@ import {Document} from 'mongoose';
 export type CustomFieldDocument = CustomField & Document;
 
 export enum FieldType {
-  STRING,
-  NUMBER,
-  BOOLEAN,
-  ARRAY,
-  DATE,
+  STRING = 'STRING',
+  NUMBER = 'NUMBER',
+  BOOLEAN = 'NUMBER',
+  ARRAY = 'ARRAY',
+  DATE = 'DATE',
 }
 
 @Schema()
@@ -19,7 +19,7 @@ export class CustomField {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({enum: FieldType})
   fieldType: FieldType;
 
   @Prop()
