@@ -1,11 +1,5 @@
 import {applyDecorators} from '@nestjs/common';
-import {
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-  ApiOkResponse,
-  ApiCreatedResponse,
-} from '@nestjs/swagger';
+import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
 import {StoreController} from './store.controller';
 import {SwaggerMethodDoc} from '../common/types';
 import {CreateStoreResponseBodyDto} from './dto/create-store.dto';
@@ -17,7 +11,6 @@ import {BaseDeleteResponseBodyDto} from './../common/dtos/base-delete-response-b
 export const docs: SwaggerMethodDoc<StoreController> = {
   createStore(summary: string) {
     return applyDecorators(
-      ApiBearerAuth(),
       ApiOperation({
         summary,
         description: '상점을 생성합니다.',
@@ -33,7 +26,6 @@ export const docs: SwaggerMethodDoc<StoreController> = {
   },
   getAllStores(summary: string) {
     return applyDecorators(
-      ApiBearerAuth(),
       ApiOperation({
         summary,
         description: '모든 상점을 조회합니다',
@@ -45,7 +37,6 @@ export const docs: SwaggerMethodDoc<StoreController> = {
   },
   getStore(summary: string) {
     return applyDecorators(
-      ApiBearerAuth(),
       ApiOperation({
         summary,
         description: 'ID로 상점을 조회합니다.',
@@ -61,7 +52,6 @@ export const docs: SwaggerMethodDoc<StoreController> = {
   },
   updateStore(summary: string) {
     return applyDecorators(
-      ApiBearerAuth(),
       ApiOperation({
         summary,
         description: 'ID로 상점 정보를 업데이트합니다.',
@@ -77,7 +67,6 @@ export const docs: SwaggerMethodDoc<StoreController> = {
   },
   deleteStore(summary: string) {
     return applyDecorators(
-      ApiBearerAuth(),
       ApiOperation({
         summary,
         description: 'ID로 상점을 삭제합니다.',
