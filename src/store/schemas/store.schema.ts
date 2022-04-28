@@ -8,7 +8,7 @@ export class Store {
   @Prop()
   id: string;
 
-  @Prop()
+  @Prop({unique: true})
   name: string;
 }
 
