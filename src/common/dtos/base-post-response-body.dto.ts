@@ -1,6 +1,6 @@
 import {ApiProperty} from '@nestjs/swagger';
 
-export class BasePostReponseDto {
+export class BasePostReponseBodyDto {
   @ApiProperty({example: '201'})
   code: number;
 
