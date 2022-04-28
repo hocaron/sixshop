@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCustomFieldValueDto } from './dto/create-custom-field-value.dto';
-import { UpdateCustomFieldValueDto } from './dto/update-custom-field-value.dto';
+import {Injectable} from '@nestjs/common';
+import {CreateCustomFieldValueDto} from './dto/create-custom-field-value.dto';
+import {UpdateCustomFieldValueDto} from './dto/update-custom-field-value.dto';
 
 @Injectable()
 export class CustomFieldValueService {

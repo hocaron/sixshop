@@ -1,6 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CustomFieldValueController } from './custom-field-value.controller';
-import { CustomFieldValueService } from './custom-field-value.service';
+import {Test, TestingModule} from '@nestjs/testing';
+import {CustomFieldValueController} from './custom-field-value.controller';
+import {CustomFieldValueService} from './custom-field-value.service';
 
 describe('CustomFieldValueController', () => {
   let controller: CustomFieldValueController;

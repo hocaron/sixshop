@@ -1,5 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CustomFieldValueService } from './custom-field-value.service';
+import {Test, TestingModule} from '@nestjs/testing';
+import {CustomFieldValueService} from './custom-field-value.service';
 
 describe('CustomFieldValueService', () => {
   let service: CustomFieldValueService;
