@@ -1,6 +1,6 @@
 import {ApiProperty} from '@nestjs/swagger';
 
-export class BaseGetReponseDto {
+export class BaseGetReponseBodyDto {
   @ApiProperty({example: '200'})
   code: number;
 
