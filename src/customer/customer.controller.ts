@@ -2,33 +2,35 @@ import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common'
 import {CustomerService} from './customer.service';
 import {CreateCustomerDto} from './dto/create-customer.dto';
 import {UpdateCustomerDto} from './dto/update-customer.dto';
+import {ApiTags} from '@nestjs/swagger';
+import {docs} from './customer.docs';
 
+@ApiTags('customer')
 @Controller('customer')
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
   @Post()
-  create(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.customerService.create(createCustomerDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.customerService.findAll();
+  @docs.createCustomer('고객 생성')
+  createCustomer(@Body() createCustomerDto: CreateCustomerDto) {
+    return this.customerService.createCustomer(createCustomerDto);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.customerService.findOne(+id);
+  @docs.getCustomer('ID로 고객 조회')
+  getCustomer(@Param('id') id: string) {
+    return this.customerService.getCustomer(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
-    return this.customerService.update(+id, updateCustomerDto);
+  @docs.updateCustomer('ID로 고객 정보 업데이트')
+  updateCustomer(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
+    return this.customerService.updateCustomer(id, updateCustomerDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.customerService.remove(+id);
+  @docs.deleteCustomer('ID로 고객 식제')
+  deleteCustomer(@Param('id') id: string) {
+    return this.customerService.deleteCustomer(id);
   }
 }
