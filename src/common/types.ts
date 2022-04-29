@@ -3,6 +3,6 @@ export type SwaggerMethodDoc<T> = {
 };
 
 export interface ArrayValue {
-  name: string;
   value: string;
+  description: string;
 }

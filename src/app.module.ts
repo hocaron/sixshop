@@ -9,10 +9,10 @@ import {CategoryModule} from './category/category.module';
 import {StoreModule} from './store/store.module';
 import {MongooseModule} from '@nestjs/mongoose';
 import {CustomFieldModule} from './custom-field/custom-field.module';
-import {CustomFieldValueModule} from './custom-field-value/custom-field-value.module';
 import {APP_FILTER, APP_INTERCEPTOR} from '@nestjs/core';
 import {TransformInterceptor} from './common/interceptors/transform.interceptor';
 import {HttpExceptionFilter} from './common/exceptions/httpException.filter';
+import {CustomerCustomFieldValueModule} from './customer-custom-field-value/customer-custom-field-value.module';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import {HttpExceptionFilter} from './common/exceptions/httpException.filter';
     CategoryModule,
     StoreModule,
     CustomFieldModule,
-    CustomFieldValueModule,
+    CustomerCustomFieldValueModule,
   ],
   controllers: [AppController],
   providers: [
