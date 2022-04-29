@@ -1,12 +1,13 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Document} from 'mongoose';
+import {ArrayValue} from 'src/common/types';
 
 export type CustomFieldDocument = CustomField & Document;
 
 export enum FieldType {
   STRING = 'STRING',
   NUMBER = 'NUMBER',
-  BOOLEAN = 'NUMBER',
+  BOOLEAN = 'BOOLEAN',
   ARRAY = 'ARRAY',
   DATE = 'DATE',
 }
