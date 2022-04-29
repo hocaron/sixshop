@@ -13,6 +13,7 @@ import {APP_FILTER, APP_INTERCEPTOR} from '@nestjs/core';
 import {TransformInterceptor} from './common/interceptors/transform.interceptor';
 import {HttpExceptionFilter} from './common/exceptions/httpException.filter';
 import {CustomerCustomFieldValueModule} from './customer-custom-field-value/customer-custom-field-value.module';
+import {OrderCustomFieldValueModule} from './order-custom-field-value/order-custom-field-value.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import {CustomerCustomFieldValueModule} from './customer-custom-field-value/cust
     StoreModule,
     CustomFieldModule,
     CustomerCustomFieldValueModule,
+    OrderCustomFieldValueModule,
   ],
   controllers: [AppController],
   providers: [
