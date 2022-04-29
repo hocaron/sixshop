@@ -36,4 +36,16 @@ export const Err = {
       message: '존재하지 않는 고객입니다.',
     },
   },
+  ORDER: {
+    NOT_FOUND_ORDER: {
+      statusCode: 400,
+      message: '존재하지 않는 주문입니다.',
+    },
+  },
+  ORDER_CUSTOM_FIELD: {
+    NOT_FOUND_ORDER_CUSTOM_FIELD: {
+      statusCode: 400,
+      message: '존재하지 않는 주문 관련 사용자 정의 필드값입니다.',
+    },
+  },
 } as const;
