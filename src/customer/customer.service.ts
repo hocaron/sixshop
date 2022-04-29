@@ -1,26 +1,54 @@
-import {Injectable} from '@nestjs/common';
-import {CreateCustomerDto} from './dto/create-customer.dto';
+import {Injectable, HttpException} from '@nestjs/common';
+import {CreateCustomerDto, CreateCustomerResponseDto} from './dto/create-customer.dto';
 import {UpdateCustomerDto} from './dto/update-customer.dto';
+import {InjectModel} from '@nestjs/mongoose';
+import {Customer, CustomerDocument} from 'src/customer/schemas/customer.schema';
+import {Model} from 'mongoose';
+import {Err} from './../common/error';
+import {GetCustomerResponseDto} from './dto/get-customer.dto';
 
 @Injectable()
 export class CustomerService {
-  create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+  constructor(
+    @InjectModel(Customer.name) private readonly customerModel: Model<CustomerDocument>,
+  ) {}
+
+  createCustomer(createCustomerDto: CreateCustomerDto): Promise<CreateCustomerResponseDto> {
+    return new this.customerModel(createCustomerDto).save();
   }
 
-  findAll() {
-    return `This action returns all customer`;
+  async getCustomer(id: string): Promise<GetCustomerResponseDto> {
+    const existingCustomer = await this.customerModel.findById(id).exec();
+    if (!existingCustomer) {
+      throw new HttpException(
+        Err.CUSTOMER.NOT_FOUND_CUSTOMER.message,
+        Err.CUSTOMER.NOT_FOUND_CUSTOMER.statusCode,
+      );
+    }
+    return existingCustomer;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async updateCustomer(id: string, updateCustomerDto: UpdateCustomerDto): Promise<string> {
+    const existingCustomer = await this.customerModel.findById(id).exec();
+    if (!existingCustomer) {
+      throw new HttpException(
+        Err.CUSTOMER.NOT_FOUND_CUSTOMER.message,
+        Err.CUSTOMER.NOT_FOUND_CUSTOMER.statusCode,
+      );
+    }
+    existingCustomer.update(updateCustomerDto).exec();
+    return '업데이트에 성공하였습니다.';
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async deleteCustomer(id: string): Promise<string> {
+    const existingCustomer = await this.customerModel.findById(id).exec();
+    if (!existingCustomer) {
+      throw new HttpException(
+        Err.CUSTOMER.NOT_FOUND_CUSTOMER.message,
+        Err.CUSTOMER.NOT_FOUND_CUSTOMER.statusCode,
+      );
+    }
+    existingCustomer.deleteOne({id});
+    return '삭제에 성공하였습니다.';
   }
 }
