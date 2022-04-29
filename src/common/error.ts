@@ -27,7 +27,7 @@ export const Err = {
   CUSTOMER_CUSTOM_FIELD: {
     NOT_FOUND_CUSTOMER_CUSTOM_FIELD: {
       statusCode: 400,
-      message: '존재하지 않는 고객 관련 사용자 정의 필드입니다.',
+      message: '존재하지 않는 고객 관련 사용자 정의 필드값입니다.',
     },
   },
   CUSTOMER: {
