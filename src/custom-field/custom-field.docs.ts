@@ -14,7 +14,7 @@ export const docs: SwaggerMethodDoc<CustomFieldController> = {
       ApiOperation({
         summary,
         description:
-          "사용자 정의 필드를 생성합니다. \t\n FieldType =['STRING', 'NUMBER', 'BOOLEAN', 'ARRAY', 'DATE'] \t\n ENUM 은 'ARRAY'를 선택해주세요.",
+          "사용자 정의 필드를 생성합니다. \t\n FieldType =['STRING', 'NUMBER', 'BOOLEAN', 'ARRAY', 'DATE'] \t\n ENUM 은 FieldType 'ARRAY'를 선택해주세요. \t\n 'ARRAY'를 선택한 경우, 'arrayValue' 데이터를 보내주세요. \t\n 해당 데이터 형식은 다음과 같습니다. [{'value' : 'male', 'description' : '남자'}, {'value' : 'female', 'description' : '여자'}] \t\n value : enum 값, description : enum 값에 대한 설명",
       }),
       ApiCreatedResponse({
         type: CreateCustomFieldResponseBodyDto,
