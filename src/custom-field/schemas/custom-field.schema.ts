@@ -20,6 +20,9 @@ export class CustomField {
   @Prop()
   name: string;
 
+  @Prop()
+  arrayValue: Array<ArrayValue>;
+
   @Prop({enum: FieldType})
   fieldType: FieldType;
 
