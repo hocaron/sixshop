@@ -1,7 +1,7 @@
 import {applyDecorators} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
-import {BaseUpdateResponseBodyDto} from '../common/dtos/base-update-response-body.dto';
-import {BaseDeleteResponseBodyDto} from '../common/dtos/base-delete-response-body.dto';
+import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
+import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
 import {CustomFieldController} from './custom-field.controller';
 import {SwaggerMethodDoc} from '../common/types';
 import {CreateCustomFieldResponseBodyDto} from './dto/create-custom-field.dto';
@@ -66,7 +66,7 @@ export const docs: SwaggerMethodDoc<CustomFieldController> = {
       }),
     );
   },
-  removeCustomField(summary: string) {
+  deleteCustomField(summary: string) {
     return applyDecorators(
       ApiOperation({
         summary,

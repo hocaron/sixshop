@@ -35,8 +35,8 @@ export class CustomFieldController {
   }
 
   @Delete(':id')
-  @docs.removeCustomField('ID로 사용자 정의 필드 삭제')
-  removeCustomField(@Param('id') id: string) {
-    return this.customFieldService.removeCustomField(id);
+  @docs.deleteCustomField('ID로 사용자 정의 필드 삭제')
+  deleteCustomField(@Param('id') id: string) {
+    return this.customFieldService.deleteCustomField(id);
   }
 }

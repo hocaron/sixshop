@@ -2,7 +2,7 @@ import {ApiProperty} from '@nestjs/swagger';
 import {IsArray, IsEnum, IsOptional} from 'class-validator';
 import {ArrayValue} from 'src/common/types';
 import {FieldType} from '../schemas/custom-field.schema';
-import {BasePostReponseBodyDto} from './../../common/dtos/base-post-response-body.dto';
+import {BasePostReponseBodyDto} from '../../common/dto/base-post-response-body.dto';
 
 export class CreateCustomFieldDto {
   @ApiProperty({example: 'gender', description: '사용자 정의 필드의 이름'})

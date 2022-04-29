@@ -56,7 +56,6 @@ export class CustomFieldService {
     /* Todo
     update type이 array 인 경우, 로직 추가
      */
-
     const existingCustomField = await this.customFieldModel.findById(id).exec();
     if (!existingCustomField) {
       throw new HttpException(
@@ -68,7 +67,7 @@ export class CustomFieldService {
     return '업데이트에 성공하였습니다.';
   }
 
-  async removeCustomField(id: string): Promise<string> {
+  async deleteCustomField(id: string): Promise<string> {
     const existingCustomField = await this.customFieldModel.findById(id).exec();
     if (!existingCustomField) {
       throw new HttpException(
