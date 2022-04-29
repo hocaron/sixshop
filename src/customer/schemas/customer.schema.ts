@@ -18,9 +18,6 @@ export class Customer {
 
   @Prop()
   password: string;
-
-  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'}]})
-  customFields: CustomField[];
 }
 
 export const CustomerSchema = SchemaFactory.createForClass(Customer);

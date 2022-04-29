@@ -5,8 +5,8 @@ import {SwaggerMethodDoc} from '../common/types';
 import {CreateStoreResponseBodyDto} from './dto/create-store.dto';
 import {GetAllStoreResponseBodyDto} from './dto/get-all-store.dto';
 import {GetStoreResponseBodyDto} from './dto/get-store.dto';
-import {BaseUpdateResponseBodyDto} from '../common/dtos/base-update-response-body.dto';
-import {BaseDeleteResponseBodyDto} from './../common/dtos/base-delete-response-body.dto';
+import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
+import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
 
 export const docs: SwaggerMethodDoc<StoreController> = {
   createStore(summary: string) {
