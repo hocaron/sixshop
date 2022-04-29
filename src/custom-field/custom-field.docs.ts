@@ -13,7 +13,8 @@ export const docs: SwaggerMethodDoc<CustomFieldController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: '사용자 정의 필드를 생성합니다.',
+        description:
+          "사용자 정의 필드를 생성합니다. \t\n FieldType =['STRING', 'NUMBER', 'BOOLEAN', 'ARRAY', 'DATE'] \t\n ENUM 은 'ARRAY'를 선택해주세요.",
       }),
       ApiCreatedResponse({
         type: CreateCustomFieldResponseBodyDto,
