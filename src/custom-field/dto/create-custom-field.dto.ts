@@ -1,5 +1,6 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {IsEnum} from 'class-validator';
+import {IsArray, IsEnum, IsOptional} from 'class-validator';
+import {ArrayValue} from 'src/common/types';
 import {FieldType} from '../schemas/custom-field.schema';
 import {BasePostReponseBodyDto} from './../../common/dtos/base-post-response-body.dto';
 
@@ -8,8 +9,16 @@ export class CreateCustomFieldDto {
   name: string;
 
   @IsEnum(FieldType)
-  @ApiProperty({example: 'STRING', enum: FieldType, description: '사용자 정의 필드의 타입'})
+  @ApiProperty({example: 'ENUM', enum: FieldType, description: '사용자 정의 필드의 타입'})
   fieldType: FieldType;
+
+  @IsOptional()
+  @IsArray()
+  @ApiProperty({
+    example: '[{"name": "남자", "value" : "male"}, {"name": "여자", "value" : "female"}]',
+    description: '사용자 정의 필드 enum에 대한 값',
+  })
+  arrayValue: Array<ArrayValue>;
 
   @ApiProperty({example: '고객의 핸드폰 정보', description: '사용자 정의 필드에 대한 설명'})
   description: string;
