@@ -3,15 +3,15 @@ import {
   CreateOrderCustomFieldValueDto,
   CreateOrderCustomFieldValueResponseDto,
 } from './dto/create-order-custom-field-value.dto';
-import {
-  OrderCustomFieldValue,
-  OrderCustomFieldValueDocument,
-} from './schemas/customer-custom-field-value.schema';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
 import {Err} from './../common/error';
-import {GetOrderCustomFieldValueResponseDto} from './dto/get-customer-custom-field-value.dto';
+import {GetOrderCustomFieldValueResponseDto} from './dto/get-order-custom-field-value.dto';
 import {UpdateOrderCustomFieldValueDto} from './dto/update-order-custom-field-value.dto';
+import {
+  OrderCustomFieldValue,
+  OrderCustomFieldValueDocument,
+} from './schemas/order-custom-field-value.schema';
 
 @Injectable()
 export class OrderCustomFieldValueService {
@@ -45,16 +45,16 @@ export class OrderCustomFieldValueService {
   async getAllOrderCustomFieldValueInStore(
     customFieldId: string,
   ): Promise<GetOrderCustomFieldValueResponseDto[]> {
-    const existingOrderCustomField = await this.orderCustomFieldValueModel
+    const existingOrderCustomFields = await this.orderCustomFieldValueModel
       .find({customFieldId})
       .exec();
-    if (!existingOrderCustomField) {
+    if (!existingOrderCustomFields) {
       throw new HttpException(
         Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.message,
         Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.statusCode,
       );
     }
-    return existingOrderCustomField;
+    return existingOrderCustomFields;
   }
 
   async updateOrderCustomFieldValue(

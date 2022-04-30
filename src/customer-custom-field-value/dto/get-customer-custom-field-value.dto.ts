@@ -4,7 +4,7 @@ import {Customer} from 'src/customer/schemas/customer.schema';
 import {CustomField} from './../../custom-field/schemas/custom-field.schema';
 
 export class GetCustomerCustomFieldValueResponseDto {
-  @ApiProperty({example: 'a1s2d3f4g5', description: '사용자 정의 필드 ID'})
+  @ApiProperty({example: 'a1s2d3f4g5', description: '고객 관련 사용자 정의 필드값 ID'})
   _id: string;
 
   @ApiProperty({example: '01012341234', description: '고객 관련 사용자 정의 필드의 값'})

@@ -5,7 +5,7 @@ import {MongooseModule} from '@nestjs/mongoose';
 import {
   OrderCustomFieldValue,
   OrderCustomFieldValueSchema,
-} from './schemas/customer-custom-field-value.schema';
+} from './schemas/order-custom-field-value.schema';
 
 @Module({
   imports: [

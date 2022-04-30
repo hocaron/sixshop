@@ -2,33 +2,41 @@ import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common'
 import {CategoryService} from './category.service';
 import {CreateCategoryDto} from './dto/create-category.dto';
 import {UpdateCategoryDto} from './dto/update-category.dto';
+import {docs} from './category.docs';
+import {ApiTags} from '@nestjs/swagger';
 
+@ApiTags('category')
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoryService.create(createCategoryDto);
+  @docs.createCategory('카테고리 생성')
+  createCategory(@Body() createCategoryDto: CreateCategoryDto) {
+    return this.categoryService.createCategory(createCategoryDto);
   }
 
   @Get()
-  findAll() {
-    return this.categoryService.findAll();
+  @docs.getAllCategories('모든 카테고리 조회')
+  getAllCategories() {
+    return this.categoryService.getAllCategories();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.categoryService.findOne(+id);
+  @docs.getCategory('ID로 카테고리 조회')
+  getCategory(@Param('id') id: string) {
+    return this.categoryService.getCategory(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return this.categoryService.update(+id, updateCategoryDto);
+  @docs.updateCategory('ID로 카테고리 정보 업데이트')
+  updateCategory(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
+    return this.categoryService.updateCategory(id, updateCategoryDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+  @docs.deleteCategory('ID로 카테고리 식제')
+  deleteCategory(@Param('id') id: string) {
+    return this.categoryService.deleteCategory(id);
   }
 }

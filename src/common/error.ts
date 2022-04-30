@@ -48,4 +48,22 @@ export const Err = {
       message: '존재하지 않는 주문 관련 사용자 정의 필드값입니다.',
     },
   },
+  CATEGORY: {
+    NOT_FOUND_CATEGORY: {
+      statusCode: 400,
+      message: '존재하지 않는 카테고리입니다.',
+    },
+  },
+  PRODUCT: {
+    NOT_FOUND_PRODUCT: {
+      statusCode: 400,
+      message: '존재하지 않는 상품입니다.',
+    },
+  },
+  PRODUCT_CUSTOM_FIELD: {
+    NOT_FOUND_PRODUCT_CUSTOM_FIELD: {
+      statusCode: 400,
+      message: '존재하지 않는 상품 관련 사용자 정의 필드값입니다.',
+    },
+  },
 } as const;

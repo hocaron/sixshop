@@ -17,19 +17,19 @@ export class OrderController {
   }
 
   @Get(':id')
-  @docs.getOrder('주문 생성')
+  @docs.getOrder('ID로 주문 조회')
   getOrder(@Param('id') id: string) {
     return this.orderService.getOrder(id);
   }
 
   @Patch(':id')
-  @docs.updateOrder('주문 생성')
+  @docs.updateOrder('ID로 주문 정보 업데이트')
   updateOrder(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.orderService.updateOrder(id, updateOrderDto);
   }
 
   @Delete(':id')
-  @docs.deleteOrder('주문 생성')
+  @docs.deleteOrder('ID로 주문 식제')
   deleteOrder(@Param('id') id: string) {
     return this.orderService.deleteOrder(id);
   }

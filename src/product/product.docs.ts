@@ -1,0 +1,79 @@
+import {applyDecorators} from '@nestjs/common';
+import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
+import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
+import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
+import {SwaggerMethodDoc} from '../common/types';
+import {ProductController} from './product.controller';
+import {CreateProductResponseBodyDto} from './dto/create-product.dto';
+import {GetAllProductResponseBodyDto} from './dto/get-all-store.dto';
+import {GetProductResponseBodyDto} from './dto/get-product.dto';
+
+export const docs: SwaggerMethodDoc<ProductController> = {
+  createProduct(summary: string) {
+    return applyDecorators(
+      ApiOperation({
+        summary,
+        description: '상품을 생성합니다.',
+      }),
+      ApiCreatedResponse({
+        type: CreateProductResponseBodyDto,
+      }),
+    );
+  },
+  getAllProductInStore(summary: string) {
+    return applyDecorators(
+      ApiOperation({
+        summary,
+        description: '상점에 속한 모든 상품을 조회합니다.',
+      }),
+      ApiOkResponse({
+        type: GetAllProductResponseBodyDto,
+      }),
+    );
+  },
+  getProduct(summary: string) {
+    return applyDecorators(
+      ApiOperation({
+        summary,
+        description: 'ID로 상품을 조회합니다.',
+      }),
+      ApiOkResponse({
+        type: GetProductResponseBodyDto,
+      }),
+      ApiResponse({
+        status: 400,
+        description: '존재하지 않는 상품입니다.',
+      }),
+    );
+  },
+  updateProduct(summary: string) {
+    return applyDecorators(
+      ApiOperation({
+        summary,
+        description: 'ID로 상품 정보을 업데이트합니다.',
+      }),
+      ApiOkResponse({
+        type: BaseUpdateResponseBodyDto,
+      }),
+      ApiResponse({
+        status: 400,
+        description: '존재하지 않는 상품입니다.',
+      }),
+    );
+  },
+  deleteProduct(summary: string) {
+    return applyDecorators(
+      ApiOperation({
+        summary,
+        description: 'ID로 상품을 삭제합니다.',
+      }),
+      ApiOkResponse({
+        type: BaseDeleteResponseBodyDto,
+      }),
+      ApiResponse({
+        status: 400,
+        description: '존재하지 않는 상품입니다.',
+      }),
+    );
+  },
+};

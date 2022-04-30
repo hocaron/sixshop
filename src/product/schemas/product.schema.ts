@@ -1,7 +1,8 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import {Document} from 'mongoose';
-import {CustomField} from './../../custom-field/schemas/custom-field.schema';
+import {Category} from 'src/category/schemas/category.schema';
+import {Store} from 'src/store/schemas/store.schema';
 
 export type ProductDocument = Product & Document;
 
@@ -16,14 +17,11 @@ export class Product {
   @Prop()
   price: number;
 
-  @Prop()
-  storeId: string;
+  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Store'}]})
+  storeId: Store;
 
-  @Prop([String])
-  categorieIds: string[];
-
-  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'}]})
-  customFields: CustomField[];
+  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Category'}]})
+  categoryIds: Category[];
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
