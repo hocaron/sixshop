@@ -1,7 +1,7 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {BaseGetReponseBodyDto} from '../../common/dto/base-get-response-body.dto';
-import {CustomField} from './../../custom-field/schemas/custom-field.schema';
-import {Order} from './../../order/schemas/order.schema';
+import {CustomField} from '../../custom-field/schemas/custom-field.schema';
+import {Order} from '../../order/schemas/order.schema';
 
 export class GetOrderCustomFieldValueResponseDto {
   @ApiProperty({example: 'a1s2d3f4g5', description: '사용자 정의 필드 ID'})

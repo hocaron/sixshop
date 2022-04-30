@@ -14,6 +14,7 @@ import {TransformInterceptor} from './common/interceptors/transform.interceptor'
 import {HttpExceptionFilter} from './common/exceptions/httpException.filter';
 import {CustomerCustomFieldValueModule} from './customer-custom-field-value/customer-custom-field-value.module';
 import {OrderCustomFieldValueModule} from './order-custom-field-value/order-custom-field-value.module';
+import {ProductCustomFieldValueModule} from './product-custom-field-value/product-custom-field-value.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import {OrderCustomFieldValueModule} from './order-custom-field-value/order-cust
     CustomFieldModule,
     CustomerCustomFieldValueModule,
     OrderCustomFieldValueModule,
+    ProductCustomFieldValueModule,
   ],
   controllers: [AppController],
   providers: [

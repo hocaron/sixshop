@@ -5,8 +5,8 @@ import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body
 import {SwaggerMethodDoc} from '../common/types';
 import {OrderCustomFieldValueController} from './order-custom-field-value.controller';
 import {CreateOrderCustomFieldValueResponseBodyDto} from './dto/create-order-custom-field-value.dto';
-import {GetAllOrderCustomFieldValueResponseBodyDto} from './dto/get-all-customer-custom-field-value.dto';
-import {GetOrderCustomFieldValueResponseBodyDto} from './dto/get-customer-custom-field-value.dto';
+import {GetAllOrderCustomFieldValueResponseBodyDto} from './dto/get-all-order-custom-field-value.dto';
+import {GetOrderCustomFieldValueResponseBodyDto} from './dto/get-order-custom-field-value.dto';
 
 export const docs: SwaggerMethodDoc<OrderCustomFieldValueController> = {
   createOrderCustomFieldValue(summary: string) {
