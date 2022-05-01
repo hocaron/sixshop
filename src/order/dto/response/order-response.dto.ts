@@ -6,6 +6,9 @@ import {Customer} from '../../../customer/schemas/customer.schema';
 import {Product} from '../../../product/schemas/product.schema';
 
 export class OrderResponseDto {
+  @ApiProperty({example: 'a1s2d3f4g5', description: '상점 ID'})
+  _id: string;
+
   @IsEnum(Status)
   @ApiProperty({example: 'ORDER', enum: Status, description: '주문 상태'})
   status: Status;
@@ -21,7 +24,4 @@ export class OrderResponseDto {
 
   @ApiProperty({example: 'sixshop', description: '상품들 ID'})
   productIds: Product[];
-
-  @ApiProperty({example: 'a1s2d3f4g5', description: '상점 ID'})
-  _id: string;
 }
