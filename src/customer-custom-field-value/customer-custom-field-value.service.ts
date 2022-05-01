@@ -1,35 +1,36 @@
 import {Injectable, HttpException} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
-import {
-  CreateCustomerCustomFieldValueDto,
-  CreateCustomerCustomFieldValueResponseDto,
-} from './dto/create-customer-custom-field-value.dto';
-import {UpdateCustomerCustomFieldValueDto} from './dto/update-customer-custom-field-value.dto';
+import {CreateCustomerCustomFieldValueRequestDto} from './dto/request/create-customer-custom-field-value-request.dto';
+import {UpdateCustomerCustomFieldValueRequestDto} from './dto/request/update-customer-custom-field-value-request.dto';
 import {Err} from './../common/error';
-import {GetCustomerCustomFieldValueResponseDto} from './dto/get-customer-custom-field-value.dto';
 import {
   CustomerCustomFieldValue,
   CustomerCustomFieldValueDocument,
 } from './schemas/customer-custom-field-value.schema';
+import {CustomerCustomFieldValueResponseDto} from './dto/response/customer-custom-field-value-response.dto';
+import {CustomerCustomFieldValueMapper} from './customer-custom-field-value.mapper';
 
 @Injectable()
 export class CustomerCustomFieldValueService {
   constructor(
     @InjectModel(CustomerCustomFieldValue.name)
     private readonly customerCustomFieldValueModel: Model<CustomerCustomFieldValueDocument>,
+    private readonly mapper: CustomerCustomFieldValueMapper,
   ) {}
 
-  createCustomerCustomFieldValue(
-    createCustomerCustomFieldValueDto: CreateCustomerCustomFieldValueDto,
-  ): Promise<CreateCustomerCustomFieldValueResponseDto> {
-    return new this.customerCustomFieldValueModel(createCustomerCustomFieldValueDto).save();
+  async createCustomerCustomFieldValue(
+    createCustomerCustomFieldValueRequestDto: CreateCustomerCustomFieldValueRequestDto,
+  ): Promise<CustomerCustomFieldValueResponseDto> {
+    return this.mapper.toResponse(
+      await new this.customerCustomFieldValueModel(createCustomerCustomFieldValueRequestDto).save(),
+    );
   }
 
   async getCustomerCustomFieldValueByCustomerAndStore(
     customFieldId: string,
     customerId: string,
-  ): Promise<GetCustomerCustomFieldValueResponseDto> {
+  ): Promise<CustomerCustomFieldValueResponseDto> {
     const existingCustomerCustomField = await this.customerCustomFieldValueModel
       .findOne({customFieldId, customerId})
       .exec();
@@ -44,7 +45,7 @@ export class CustomerCustomFieldValueService {
 
   async getAllCustomerCustomFieldValueInStore(
     customFieldId: string,
-  ): Promise<GetCustomerCustomFieldValueResponseDto[]> {
+  ): Promise<CustomerCustomFieldValueResponseDto[]> {
     const existingCustomerCustomField = await this.customerCustomFieldValueModel
       .find({customFieldId})
       .exec();
@@ -59,32 +60,35 @@ export class CustomerCustomFieldValueService {
 
   async updateCustomerCustomFieldValue(
     id: string,
-    updateCustomerCustomFieldValueDto: UpdateCustomerCustomFieldValueDto,
-  ): Promise<string> {
-    const existingCustomerCustomField = await this.customerCustomFieldValueModel
-      .findById(id)
-      .exec();
-    if (!existingCustomerCustomField) {
-      throw new HttpException(
-        Err.CUSTOMER_CUSTOM_FIELD.NOT_FOUND_CUSTOMER_CUSTOM_FIELD.message,
-        Err.CUSTOMER_CUSTOM_FIELD.NOT_FOUND_CUSTOMER_CUSTOM_FIELD.statusCode,
-      );
-    }
-    existingCustomerCustomField.update(updateCustomerCustomFieldValueDto).exec();
-    return '업데이트에 성공하였습니다.';
+    updateCustomerCustomFieldValueDto: UpdateCustomerCustomFieldValueRequestDto,
+  ): Promise<CustomerCustomFieldValueResponseDto> {
+    const existingCustomerCustomField = await this.checkAndFindById(id);
+    await existingCustomerCustomField.update(updateCustomerCustomFieldValueDto).exec();
+    return this.mapper.toResponse(await this.findById(existingCustomerCustomField.id));
   }
 
   async deleteCustomerCustomFieldValue(id: string): Promise<string> {
-    const existingCustomerCustomField = await this.customerCustomFieldValueModel
-      .findById(id)
+    const existingCustomerCustomField = await this.checkAndFindById(id);
+    existingCustomerCustomField.deleteOne({id});
+    return `${id} 삭제에 성공하였습니다.`;
+  }
+
+  private async findById(id: string) {
+    return await this.customerCustomFieldValueModel
+      .findOne({
+        id,
+      })
       .exec();
-    if (!existingCustomerCustomField) {
+  }
+
+  private async checkAndFindById(id: string) {
+    const customerCustomField = await this.customerCustomFieldValueModel.findById(id).exec();
+    if (!customerCustomField) {
       throw new HttpException(
         Err.CUSTOMER_CUSTOM_FIELD.NOT_FOUND_CUSTOMER_CUSTOM_FIELD.message,
         Err.CUSTOMER_CUSTOM_FIELD.NOT_FOUND_CUSTOMER_CUSTOM_FIELD.statusCode,
       );
     }
-    existingCustomerCustomField.deleteOne({id});
-    return '삭제에 성공하였습니다.';
+    return customerCustomField;
   }
 }

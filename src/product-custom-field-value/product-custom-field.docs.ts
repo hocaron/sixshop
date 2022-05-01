@@ -1,12 +1,10 @@
 import {applyDecorators} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
-import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
 import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
 import {SwaggerMethodDoc} from '../common/types';
 import {ProductCustomFieldValueController} from './product-custom-field-value.controller';
-import {CreateProductCustomFieldValueResponseBodyDto} from './dto/create-product-custom-field-value.dto';
-import {GetAllProductCustomFieldValueResponseBodyDto} from './dto/get-all-product-custom-field-value.dto';
-import {GetProductCustomFieldValueResponseBodyDto} from './dto/get-product-custom-field-value.dto';
+import {ProductCustomFieldValueResponseBodyDto} from './dto/response/product-custom-field-value-response-body.dto';
+import {ProductCustomFieldValuesResponseBodyDto} from './dto/response/product-custom-field-values-response-body.dto';
 
 export const docs: SwaggerMethodDoc<ProductCustomFieldValueController> = {
   createProductCustomFieldValue(summary: string) {
@@ -16,7 +14,7 @@ export const docs: SwaggerMethodDoc<ProductCustomFieldValueController> = {
         description: '상품 관련 사용자 정의 필드값을 생성합니다.',
       }),
       ApiCreatedResponse({
-        type: CreateProductCustomFieldValueResponseBodyDto,
+        type: ProductCustomFieldValueResponseBodyDto,
       }),
     );
   },
@@ -27,7 +25,7 @@ export const docs: SwaggerMethodDoc<ProductCustomFieldValueController> = {
         description: 'customFieldId와 productId로 상품 관련 사용자 정의 필드값를 조회합니다.',
       }),
       ApiOkResponse({
-        type: GetAllProductCustomFieldValueResponseBodyDto,
+        type: ProductCustomFieldValueResponseBodyDto,
       }),
     );
   },
@@ -39,7 +37,7 @@ export const docs: SwaggerMethodDoc<ProductCustomFieldValueController> = {
           'customFieldId로 상품 관련 사용자 정의 필드값를 조회합니다. \t\n customFieldId은 상점마다 유일한 값이므로, 헤당 필드를 상점별로 조회하는 .',
       }),
       ApiOkResponse({
-        type: GetProductCustomFieldValueResponseBodyDto,
+        type: ProductCustomFieldValuesResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
@@ -54,7 +52,7 @@ export const docs: SwaggerMethodDoc<ProductCustomFieldValueController> = {
         description: 'ID로 상품 관련 사용자 정의 필드값 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
-        type: BaseUpdateResponseBodyDto,
+        type: ProductCustomFieldValueResponseBodyDto,
       }),
       ApiResponse({
         status: 400,

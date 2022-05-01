@@ -1,11 +1,9 @@
 import {applyDecorators} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
-import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
 import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
 import {SwaggerMethodDoc} from '../common/types';
 import {CustomerController} from './customer.controller';
-import {CreateCustomerResponseBodyDto} from './dto/create-customer.dto';
-import {GetCustomerResponseBodyDto} from './dto/get-customer.dto';
+import {CustomerResponseBodyDto} from './dto/response/customer-response-body.dto';
 
 export const docs: SwaggerMethodDoc<CustomerController> = {
   createCustomer(summary: string) {
@@ -15,7 +13,7 @@ export const docs: SwaggerMethodDoc<CustomerController> = {
         description: '고객을 생성합니다.',
       }),
       ApiCreatedResponse({
-        type: CreateCustomerResponseBodyDto,
+        type: CustomerResponseBodyDto,
       }),
     );
   },
@@ -26,7 +24,7 @@ export const docs: SwaggerMethodDoc<CustomerController> = {
         description: 'Id로 고객을 조회합니다.',
       }),
       ApiOkResponse({
-        type: GetCustomerResponseBodyDto,
+        type: CustomerResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
@@ -41,7 +39,7 @@ export const docs: SwaggerMethodDoc<CustomerController> = {
         description: 'ID로 고객 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
-        type: BaseUpdateResponseBodyDto,
+        type: CustomerResponseBodyDto,
       }),
       ApiResponse({
         status: 400,

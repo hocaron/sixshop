@@ -1,18 +1,18 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {StoreService} from './store.service';
-import {CreateStoreDto} from './dto/create-store.dto';
-import {UpdateStoreDto} from './dto/update-store.dto';
+import {CreateStoreRequestDto} from './dto/request/create-store-request.dto';
+import {UpdateStoreRequestDto} from './dto/request/update-store-request.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './store.docs';
 
-@ApiTags('store')
-@Controller('store')
+@ApiTags('stores')
+@Controller('stores')
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
   @Post()
   @docs.createStore('상점 생성')
-  createStore(@Body() createStoreDto: CreateStoreDto) {
+  createStore(@Body() createStoreDto: CreateStoreRequestDto) {
     return this.storeService.createStore(createStoreDto);
   }
 
@@ -30,7 +30,7 @@ export class StoreController {
 
   @Patch(':id')
   @docs.updateStore('ID로 상점 정보 업데이트')
-  updateStore(@Param('id') id: string, @Body() updateStoreDto: UpdateStoreDto) {
+  updateStore(@Param('id') id: string, @Body() updateStoreDto: UpdateStoreRequestDto) {
     return this.storeService.updateStore(id, updateStoreDto);
   }
 

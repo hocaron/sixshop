@@ -1,12 +1,12 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {CustomFieldService} from './custom-field.service';
-import {CreateCustomFieldDto} from './dto/create-custom-field.dto';
-import {UpdateCustomFieldDto} from './dto/update-custom-field.dto';
+import {CreateCustomFieldDto} from './dto/request/create-custom-field.dto';
+import {UpdateCustomFieldDto} from './dto/request/update-custom-field.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './custom-field.docs';
 
-@ApiTags('custom-field')
-@Controller('custom-field')
+@ApiTags('custom-fields')
+@Controller('custom-fields')
 export class CustomFieldController {
   constructor(private readonly customFieldService: CustomFieldService) {}
 

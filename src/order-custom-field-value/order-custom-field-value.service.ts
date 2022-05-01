@@ -1,35 +1,36 @@
 import {Injectable, HttpException} from '@nestjs/common';
-import {
-  CreateOrderCustomFieldValueDto,
-  CreateOrderCustomFieldValueResponseDto,
-} from './dto/create-order-custom-field-value.dto';
+import {CreateOrderCustomFieldValueRequestDto} from './dto/request/create-order-custom-field-value-request.dto';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
 import {Err} from './../common/error';
-import {GetOrderCustomFieldValueResponseDto} from './dto/get-order-custom-field-value.dto';
-import {UpdateOrderCustomFieldValueDto} from './dto/update-order-custom-field-value.dto';
+import {UpdateOrderCustomFieldValueRequestDto} from './dto/request/update-order-custom-field-value-request.dto';
 import {
   OrderCustomFieldValue,
   OrderCustomFieldValueDocument,
 } from './schemas/order-custom-field-value.schema';
+import {OrderCustomFieldValueResponseDto} from './dto/response/order-custom-field-value-response.dto';
+import {OrderCustomFieldValueMapper} from './order-custom-field-value.mapper';
 
 @Injectable()
 export class OrderCustomFieldValueService {
   constructor(
     @InjectModel(OrderCustomFieldValue.name)
     private readonly orderCustomFieldValueModel: Model<OrderCustomFieldValueDocument>,
+    private readonly mapper: OrderCustomFieldValueMapper,
   ) {}
 
-  createOrderCustomFieldValue(
-    createOrderCustomFieldValueDto: CreateOrderCustomFieldValueDto,
-  ): Promise<CreateOrderCustomFieldValueResponseDto> {
-    return new this.orderCustomFieldValueModel(createOrderCustomFieldValueDto).save();
+  async createOrderCustomFieldValue(
+    createOrderCustomFieldValueRequestDto: CreateOrderCustomFieldValueRequestDto,
+  ): Promise<OrderCustomFieldValueResponseDto> {
+    return this.mapper.toResponse(
+      await new this.orderCustomFieldValueModel(createOrderCustomFieldValueRequestDto).save(),
+    );
   }
 
   async getOrderCustomFieldValueByOrderAndStore(
     customFieldId: string,
     orderId: string,
-  ): Promise<GetOrderCustomFieldValueResponseDto> {
+  ): Promise<OrderCustomFieldValueResponseDto> {
     const existingOrderCustomField = await this.orderCustomFieldValueModel
       .findOne({customFieldId, orderId})
       .exec();
@@ -44,7 +45,7 @@ export class OrderCustomFieldValueService {
 
   async getAllOrderCustomFieldValueInStore(
     customFieldId: string,
-  ): Promise<GetOrderCustomFieldValueResponseDto[]> {
+  ): Promise<OrderCustomFieldValueResponseDto[]> {
     const existingOrderCustomFields = await this.orderCustomFieldValueModel
       .find({customFieldId})
       .exec();
@@ -59,28 +60,35 @@ export class OrderCustomFieldValueService {
 
   async updateOrderCustomFieldValue(
     id: string,
-    updateOrderCustomFieldValueDto: UpdateOrderCustomFieldValueDto,
-  ): Promise<string> {
-    const existingOrderCustomField = await this.orderCustomFieldValueModel.findById(id).exec();
-    if (!existingOrderCustomField) {
-      throw new HttpException(
-        Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.message,
-        Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.statusCode,
-      );
-    }
-    existingOrderCustomField.update(updateOrderCustomFieldValueDto).exec();
-    return '업데이트에 성공하였습니다.';
+    updateOrderCustomFieldValueDto: UpdateOrderCustomFieldValueRequestDto,
+  ): Promise<OrderCustomFieldValueResponseDto> {
+    const existingOrderCustomField = await this.checkAndFindById(id);
+    await existingOrderCustomField.update(updateOrderCustomFieldValueDto).exec();
+    return this.mapper.toResponse(await this.findById(existingOrderCustomField.id));
   }
 
   async deleteOrderCustomFieldValue(id: string): Promise<string> {
-    const existingOrderCustomField = await this.orderCustomFieldValueModel.findById(id).exec();
-    if (!existingOrderCustomField) {
+    const existingOrderCustomField = await this.checkAndFindById(id);
+    existingOrderCustomField.deleteOne({id});
+    return `${id} 삭제에 성공하였습니다.`;
+  }
+
+  private async findById(id: string) {
+    return await this.orderCustomFieldValueModel
+      .findOne({
+        id,
+      })
+      .exec();
+  }
+
+  private async checkAndFindById(id: string) {
+    const orderCustomFieldValue = await this.orderCustomFieldValueModel.findById(id).exec();
+    if (!orderCustomFieldValue) {
       throw new HttpException(
         Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.message,
         Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.statusCode,
       );
     }
-    existingOrderCustomField.deleteOne({id});
-    return '삭제에 성공하였습니다.';
+    return orderCustomFieldValue;
   }
 }

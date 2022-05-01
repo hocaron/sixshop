@@ -1,52 +1,57 @@
 import {Injectable, HttpException} from '@nestjs/common';
-import {CreateOrderDto, CreateOrderResponseDto} from './dto/create-order.dto';
-import {UpdateOrderDto} from './dto/update-order.dto';
+import {UpdateOrderRequestDto} from './dto/request/update-order-request.dto';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
 import {Err} from './../common/error';
 import {Order, OrderDocument} from './schemas/order.schema';
-import {GetOrderResponseDto} from './dto/get-order.dto';
+import {OrderResponseDto} from './dto/response/order-response.dto';
+import {OrderMapper} from './order.mapper';
+import {CreateOrderRequestDto} from './dto/request/create-order-request.dto';
 
 @Injectable()
 export class OrderService {
-  constructor(@InjectModel(Order.name) private readonly orderModel: Model<OrderDocument>) {}
+  constructor(
+    @InjectModel(Order.name) private readonly orderModel: Model<OrderDocument>,
+    private readonly mapper: OrderMapper,
+  ) {}
 
-  createOrder(createOrderDto: CreateOrderDto): Promise<CreateOrderResponseDto> {
-    return new this.orderModel(createOrderDto).save();
+  async createOrder(createOrderDto: CreateOrderRequestDto): Promise<OrderResponseDto> {
+    return this.mapper.toResponse(await new this.orderModel(createOrderDto).save());
   }
 
-  async getOrder(id: string): Promise<GetOrderResponseDto> {
-    const existingOrder = await this.orderModel.findById(id).exec();
-    if (!existingOrder) {
-      throw new HttpException(
-        Err.ORDER.NOT_FOUND_ORDER.message,
-        Err.ORDER.NOT_FOUND_ORDER.statusCode,
-      );
-    }
-    return existingOrder;
+  async getOrder(id: string): Promise<OrderResponseDto> {
+    const existingOrder = await this.checkAndFindById(id);
+    return this.mapper.toResponse(existingOrder);
   }
 
-  async updateOrder(id: string, updateOrderDto: UpdateOrderDto): Promise<string> {
-    const existingOrder = await this.orderModel.findById(id).exec();
-    if (!existingOrder) {
-      throw new HttpException(
-        Err.ORDER.NOT_FOUND_ORDER.message,
-        Err.ORDER.NOT_FOUND_ORDER.statusCode,
-      );
-    }
-    existingOrder.update(updateOrderDto).exec();
-    return '업데이트에 성공하였습니다.';
+  async updateOrder(id: string, updateOrderDto: UpdateOrderRequestDto): Promise<OrderResponseDto> {
+    const existingOrder = await this.checkAndFindById(id);
+    await existingOrder.update(updateOrderDto).exec();
+    return this.mapper.toResponse(await this.findById(existingOrder.id));
   }
 
   async deleteOrder(id: string): Promise<string> {
-    const existingOrder = await this.orderModel.findById(id).exec();
-    if (!existingOrder) {
+    const existingOrder = await this.checkAndFindById(id);
+    existingOrder.deleteOne({id});
+    return `${id} 삭제에 성공하였습니다.`;
+  }
+
+  private async findById(id: string) {
+    return await this.orderModel
+      .findOne({
+        id,
+      })
+      .exec();
+  }
+
+  private async checkAndFindById(id: string) {
+    const order = await this.orderModel.findById(id).exec();
+    if (!order) {
       throw new HttpException(
         Err.ORDER.NOT_FOUND_ORDER.message,
         Err.ORDER.NOT_FOUND_ORDER.statusCode,
       );
     }
-    existingOrder.deleteOne({id});
-    return '삭제에 성공하였습니다.';
+    return order;
   }
 }

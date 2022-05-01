@@ -1,22 +1,22 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {CustomerCustomFieldValueService} from './customer-custom-field-value.service';
-import {CreateCustomerCustomFieldValueDto} from './dto/create-customer-custom-field-value.dto';
-import {UpdateCustomerCustomFieldValueDto} from './dto/update-customer-custom-field-value.dto';
+import {CreateCustomerCustomFieldValueRequestDto} from './dto/request/create-customer-custom-field-value-request.dto';
+import {UpdateCustomerCustomFieldValueRequestDto} from './dto/request/update-customer-custom-field-value-request.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './customer-custom-field.docs';
 
-@ApiTags('customer-custom-field-value')
-@Controller('customer-custom-field-value')
+@ApiTags('customer-custom-field-values')
+@Controller('customer-custom-field-values')
 export class CustomerCustomFieldValueController {
   constructor(private readonly customerCustomFieldValueService: CustomerCustomFieldValueService) {}
 
   @Post()
   @docs.createCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 생성')
   createCustomerCustomFieldValue(
-    @Body() createCustomerCustomFieldValueDto: CreateCustomerCustomFieldValueDto,
+    @Body() createCustomerCustomFieldValueRequestDto: CreateCustomerCustomFieldValueRequestDto,
   ) {
     return this.customerCustomFieldValueService.createCustomerCustomFieldValue(
-      createCustomerCustomFieldValueDto,
+      createCustomerCustomFieldValueRequestDto,
     );
   }
 
@@ -44,11 +44,11 @@ export class CustomerCustomFieldValueController {
   @docs.updateCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 업데이트')
   updateCustomerCustomFieldValue(
     @Param('id') id: string,
-    @Body() updateCustomerCustomFieldValueDto: UpdateCustomerCustomFieldValueDto,
+    @Body() updateCustomerCustomFieldValueRequestDto: UpdateCustomerCustomFieldValueRequestDto,
   ) {
     return this.customerCustomFieldValueService.updateCustomerCustomFieldValue(
       id,
-      updateCustomerCustomFieldValueDto,
+      updateCustomerCustomFieldValueRequestDto,
     );
   }
 

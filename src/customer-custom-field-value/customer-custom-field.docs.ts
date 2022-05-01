@@ -1,13 +1,10 @@
 import {applyDecorators} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
-import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
 import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
 import {SwaggerMethodDoc} from '../common/types';
 import {CustomerCustomFieldValueController} from './customer-custom-field-value.controller';
-import {CreateCustomerCustomFieldValueResponseBodyDto} from './dto/create-customer-custom-field-value.dto';
-import {GetCustomerCustomFieldValueResponseBodyDto} from './dto/get-customer-custom-field-value.dto';
-import {GetAllCustomerCustomFieldValueResponseBodyDto} from './dto/get-all-customer-custom-field-value.dto';
-
+import {CustomerCustomFieldValuesResponseBodyDto} from './dto/response/customer-custom-field-values-response-body.dto';
+import {CustomerCustomFieldValueResponseBodyDto} from './dto/response/customer-custom-field-value-response-body.dto';
 export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
   createCustomerCustomFieldValue(summary: string) {
     return applyDecorators(
@@ -16,7 +13,7 @@ export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
         description: '고객 관련 사용자 정의 필드값을 생성합니다.',
       }),
       ApiCreatedResponse({
-        type: CreateCustomerCustomFieldValueResponseBodyDto,
+        type: CustomerCustomFieldValueResponseBodyDto,
       }),
     );
   },
@@ -27,7 +24,7 @@ export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
         description: 'customFieldId와 customerId로 고객 관련 사용자 정의 필드값를 조회합니다.',
       }),
       ApiOkResponse({
-        type: GetAllCustomerCustomFieldValueResponseBodyDto,
+        type: CustomerCustomFieldValueResponseBodyDto,
       }),
     );
   },
@@ -39,7 +36,7 @@ export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
           'customFieldId로 고객 관련 사용자 정의 필드값를 조회합니다. \t\n customFieldId은 상점마다 유일한 값이므로, 헤당 필드를 상점별로 조회하는 .',
       }),
       ApiOkResponse({
-        type: GetCustomerCustomFieldValueResponseBodyDto,
+        type: CustomerCustomFieldValuesResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
@@ -54,7 +51,7 @@ export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
         description: 'ID로 고객 관련 사용자 정의 필드값 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
-        type: BaseUpdateResponseBodyDto,
+        type: CustomerCustomFieldValueResponseBodyDto,
       }),
       ApiResponse({
         status: 400,

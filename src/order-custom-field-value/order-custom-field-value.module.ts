@@ -6,6 +6,7 @@ import {
   OrderCustomFieldValue,
   OrderCustomFieldValueSchema,
 } from './schemas/order-custom-field-value.schema';
+import {OrderCustomFieldValueMapper} from './order-custom-field-value.mapper';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import {
     ]),
   ],
   controllers: [OrderCustomFieldValueController],
-  providers: [OrderCustomFieldValueService],
+  providers: [OrderCustomFieldValueService, OrderCustomFieldValueMapper],
 })
 export class OrderCustomFieldValueModule {}

@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {CategoryService} from './category.service';
-import {CreateCategoryDto} from './dto/create-category.dto';
-import {UpdateCategoryDto} from './dto/update-category.dto';
+import {CreateCategoryRequestDto} from './dto/request/create-category-request.dto';
+import {UpdateCategoryRequestDto} from './dto/request/update-category-request.dto';
 import {docs} from './category.docs';
 import {ApiTags} from '@nestjs/swagger';
 
@@ -12,7 +12,7 @@ export class CategoryController {
 
   @Post()
   @docs.createCategory('카테고리 생성')
-  createCategory(@Body() createCategoryDto: CreateCategoryDto) {
+  createCategory(@Body() createCategoryDto: CreateCategoryRequestDto) {
     return this.categoryService.createCategory(createCategoryDto);
   }
 
@@ -30,7 +30,7 @@ export class CategoryController {
 
   @Patch(':id')
   @docs.updateCategory('ID로 카테고리 정보 업데이트')
-  updateCategory(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
+  updateCategory(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryRequestDto) {
     return this.categoryService.updateCategory(id, updateCategoryDto);
   }
 

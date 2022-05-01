@@ -1,21 +1,27 @@
 import {Injectable, HttpException} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
-import {CreateProductDto, CreateProductResponseDto} from './dto/create-product.dto';
-import {UpdateProductDto} from './dto/update-product.dto';
+import {UpdateProductRequestDto} from './dto/request/update-product-request.dto';
 import {Product, ProductDocument} from 'src/product/schemas/product.schema';
 import {Model} from 'mongoose';
 import {Err} from './../common/error';
-import {GetProductResponseDto} from './dto/get-product.dto';
+import {ProductResponseDto} from './dto/response/product-response.dto';
+import {ProductMapper} from './product.mapper';
+import {CreateProductRequestDto} from './dto/request/create-product-request.dto';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel(Product.name) private readonly productModel: Model<ProductDocument>) {}
+  constructor(
+    @InjectModel(Product.name) private readonly productModel: Model<ProductDocument>,
+    private readonly mapper: ProductMapper,
+  ) {}
 
-  createProduct(createProductDto: CreateProductDto): Promise<CreateProductResponseDto> {
-    return new this.productModel(createProductDto).save();
+  async createProduct(
+    createProductRequestDto: CreateProductRequestDto,
+  ): Promise<ProductResponseDto> {
+    return this.mapper.toResponse(await new this.productModel(createProductRequestDto).save());
   }
 
-  async getAllProductInStore(storeId: string): Promise<GetProductResponseDto[]> {
+  async getAllProductInStore(storeId: string): Promise<ProductResponseDto[]> {
     const existingProducts = await this.productModel.find({storeId}).exec();
     if (!existingProducts) {
       throw new HttpException(
@@ -26,38 +32,42 @@ export class ProductService {
     return existingProducts;
   }
 
-  async getProduct(id: string): Promise<GetProductResponseDto> {
-    const existingProduct = await this.productModel.findById(id).exec();
-    if (!existingProduct) {
-      throw new HttpException(
-        Err.ORDER.NOT_FOUND_ORDER.message,
-        Err.ORDER.NOT_FOUND_ORDER.statusCode,
-      );
-    }
-    return existingProduct;
+  async getProduct(id: string): Promise<ProductResponseDto> {
+    const existingProduct = await this.checkAndFindById(id);
+    return this.mapper.toResponse(existingProduct);
   }
 
-  async updateProduct(id: string, updateProductDto: UpdateProductDto): Promise<string> {
-    const existingProduct = await this.productModel.findById(id).exec();
-    if (!existingProduct) {
-      throw new HttpException(
-        Err.ORDER.NOT_FOUND_ORDER.message,
-        Err.ORDER.NOT_FOUND_ORDER.statusCode,
-      );
-    }
-    existingProduct.update(updateProductDto).exec();
-    return '업데이트에 성공하였습니다.';
+  async updateProduct(
+    id: string,
+    updateProductDto: UpdateProductRequestDto,
+  ): Promise<ProductResponseDto> {
+    const existingProduct = await this.checkAndFindById(id);
+    await existingProduct.update(updateProductDto).exec();
+    return this.mapper.toResponse(await this.findById(existingProduct.id));
   }
 
   async deleteProduct(id: string): Promise<string> {
-    const existingProduct = await this.productModel.findById(id).exec();
-    if (!existingProduct) {
+    const existingProduct = await this.checkAndFindById(id);
+    existingProduct.deleteOne({id});
+    return `${id} 삭제에 성공하였습니다.`;
+  }
+
+  private async findById(id: string) {
+    return await this.productModel
+      .findOne({
+        id,
+      })
+      .exec();
+  }
+
+  private async checkAndFindById(id: string) {
+    const product = await this.productModel.findById(id).exec();
+    if (!product) {
       throw new HttpException(
-        Err.ORDER.NOT_FOUND_ORDER.message,
-        Err.ORDER.NOT_FOUND_ORDER.statusCode,
+        Err.PRODUCT.NOT_FOUND_PRODUCT.message,
+        Err.PRODUCT.NOT_FOUND_PRODUCT.statusCode,
       );
     }
-    existingProduct.deleteOne({id});
-    return '삭제에 성공하였습니다.';
+    return product;
   }
 }

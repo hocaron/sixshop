@@ -1,5 +1,5 @@
 import {Module} from '@nestjs/common';
-import {ConfigModule} from '@nestjs/config';
+import {ConfigModule, ConfigService} from '@nestjs/config';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {CustomerModule} from './customer/customer.module';
@@ -15,13 +15,19 @@ import {HttpExceptionFilter} from './common/exceptions/httpException.filter';
 import {CustomerCustomFieldValueModule} from './customer-custom-field-value/customer-custom-field-value.module';
 import {OrderCustomFieldValueModule} from './order-custom-field-value/order-custom-field-value.module';
 import {ProductCustomFieldValueModule} from './product-custom-field-value/product-custom-field-value.module';
+import mongoConfig from './common/config/mongo.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: process.env.NODE_ENV == 'dev' ? '.env.dev' : '.env.prod',
+      load: [mongoConfig],
     }),
-    MongooseModule.forRoot('mongodb://root:root@localhost:27017/sixshop'),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => config.get('mongo'),
+      inject: [ConfigService],
+    }),
     CustomerModule,
     ProductModule,
     OrderModule,

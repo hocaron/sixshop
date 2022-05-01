@@ -2,11 +2,9 @@ import {applyDecorators} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
 import {StoreController} from './store.controller';
 import {SwaggerMethodDoc} from '../common/types';
-import {CreateStoreResponseBodyDto} from './dto/create-store.dto';
-import {GetAllStoreResponseBodyDto} from './dto/get-all-store.dto';
-import {GetStoreResponseBodyDto} from './dto/get-store.dto';
-import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
 import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
+import {StoreResponseBodyDto} from './dto/response/store-response-body.dto';
+import {StoresResponseBodyDto} from './dto/response/stores-response-body.dto';
 
 export const docs: SwaggerMethodDoc<StoreController> = {
   createStore(summary: string) {
@@ -16,7 +14,7 @@ export const docs: SwaggerMethodDoc<StoreController> = {
         description: '상점을 생성합니다.',
       }),
       ApiCreatedResponse({
-        type: CreateStoreResponseBodyDto,
+        type: StoreResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
@@ -31,7 +29,7 @@ export const docs: SwaggerMethodDoc<StoreController> = {
         description: '모든 상점을 조회합니다',
       }),
       ApiOkResponse({
-        type: GetAllStoreResponseBodyDto,
+        type: StoresResponseBodyDto,
       }),
     );
   },
@@ -42,7 +40,7 @@ export const docs: SwaggerMethodDoc<StoreController> = {
         description: 'ID로 상점을 조회합니다.',
       }),
       ApiOkResponse({
-        type: GetStoreResponseBodyDto,
+        type: StoreResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
@@ -57,7 +55,7 @@ export const docs: SwaggerMethodDoc<StoreController> = {
         description: 'ID로 상점 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
-        type: BaseUpdateResponseBodyDto,
+        type: StoreResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
