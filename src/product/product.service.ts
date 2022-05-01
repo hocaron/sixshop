@@ -61,13 +61,13 @@ export class ProductService {
   }
 
   private async checkAndFindById(id: string) {
-    const order = await this.productModel.findById(id).exec();
-    if (!order) {
+    const product = await this.productModel.findById(id).exec();
+    if (!product) {
       throw new HttpException(
         Err.PRODUCT.NOT_FOUND_PRODUCT.message,
         Err.PRODUCT.NOT_FOUND_PRODUCT.statusCode,
       );
     }
-    return order;
+    return product;
   }
 }

@@ -1,12 +1,10 @@
 import {applyDecorators} from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse} from '@nestjs/swagger';
-import {BaseUpdateResponseBodyDto} from '../common/dto/base-update-response-body.dto';
 import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body.dto';
 import {SwaggerMethodDoc} from '../common/types';
 import {CategoryController} from './category.controller';
-import {CreateCategoryResponseBodyDto} from './dto/create-category.dto';
-import {GetCategoryResponseBodyDto} from './dto/get-category.dto';
-import {GetAllCategoryResponseBodyDto} from './dto/get-all-category.dto';
+import {CategoryResponseBodyDto} from './dto/response/category-response-body.dto';
+import {CategoriesResponseBodyDto} from './dto/response/categories-response-body.dto';
 
 export const docs: SwaggerMethodDoc<CategoryController> = {
   createCategory(summary: string) {
@@ -16,7 +14,7 @@ export const docs: SwaggerMethodDoc<CategoryController> = {
         description: '카테고리를 생성합니다.',
       }),
       ApiCreatedResponse({
-        type: CreateCategoryResponseBodyDto,
+        type: CategoryResponseBodyDto,
       }),
     );
   },
@@ -27,7 +25,7 @@ export const docs: SwaggerMethodDoc<CategoryController> = {
         description: '모든 카테고리를 조회합니다.',
       }),
       ApiOkResponse({
-        type: GetAllCategoryResponseBodyDto,
+        type: CategoriesResponseBodyDto,
       }),
     );
   },
@@ -38,7 +36,7 @@ export const docs: SwaggerMethodDoc<CategoryController> = {
         description: 'Id로 카테고리를 조회합니다.',
       }),
       ApiOkResponse({
-        type: GetCategoryResponseBodyDto,
+        type: CategoryResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
@@ -53,7 +51,7 @@ export const docs: SwaggerMethodDoc<CategoryController> = {
         description: 'ID로 카테고리 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
-        type: BaseUpdateResponseBodyDto,
+        type: CategoryResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
