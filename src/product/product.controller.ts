@@ -5,8 +5,8 @@ import {UpdateProductRequestDto} from './dto/request/update-product-request.dto'
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './product.docs';
 
-@ApiTags('product')
-@Controller('product')
+@ApiTags('products')
+@Controller('products')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 

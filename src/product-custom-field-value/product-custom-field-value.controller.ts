@@ -5,8 +5,8 @@ import {docs} from './product-custom-field.docs';
 import {CreateProductCustomFieldValueRequestDto} from './dto/request/create-product-custom-field-value-request.dto';
 import {UpdateProductCustomFieldValueRequestDto} from './dto/request/update-product-custom-field-value-request.dto';
 
-@ApiTags('product-custom-field-value')
-@Controller('product-custom-field-value')
+@ApiTags('product-custom-field-values')
+@Controller('product-custom-field-values')
 export class ProductCustomFieldValueController {
   constructor(private readonly productCustomFieldValueService: ProductCustomFieldValueService) {}
 

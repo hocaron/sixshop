@@ -5,8 +5,8 @@ import {UpdateCustomerCustomFieldValueRequestDto} from './dto/request/update-cus
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './customer-custom-field.docs';
 
-@ApiTags('customer-custom-field-value')
-@Controller('customer-custom-field-value')
+@ApiTags('customer-custom-field-values')
+@Controller('customer-custom-field-values')
 export class CustomerCustomFieldValueController {
   constructor(private readonly customerCustomFieldValueService: CustomerCustomFieldValueService) {}
 

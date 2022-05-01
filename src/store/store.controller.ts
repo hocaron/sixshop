@@ -5,8 +5,8 @@ import {UpdateStoreRequestDto} from './dto/request/update-store-request.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './store.docs';
 
-@ApiTags('store')
-@Controller('store')
+@ApiTags('stores')
+@Controller('stores')
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
