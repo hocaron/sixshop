@@ -1,8 +1,8 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {CategoryResponseDto} from './category-response.dto';
-import {BaseGetReponseBodyDto} from '../../../common/dto/base-get-response-body.dto';
+import {BaseGetResponseBodyDto} from '../../../common/dto/base-get-response-body.dto';
 
-export class CategoriesResponseBodyDto extends BaseGetReponseBodyDto {
+export class CategoriesResponseBodyDto extends BaseGetResponseBodyDto {
   @ApiProperty({type: [CategoryResponseDto]})
   data: CategoryResponseDto[];
 }
