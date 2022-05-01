@@ -1,7 +1,5 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import mongoose from 'mongoose';
 import {Document} from 'mongoose';
-import {CustomField} from './../../custom-field/schemas/custom-field.schema';
 
 export type CustomerDocument = Customer & Document;
 

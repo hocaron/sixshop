@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {CustomerService} from './customer.service';
-import {CreateCustomerDto} from './dto/create-customer.dto';
-import {UpdateCustomerDto} from './dto/update-customer.dto';
+import {CreateCustomerDto} from './dto/request/create-customer.dto';
+import {UpdateCustomerDto} from './dto/request/update-customer.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './customer.docs';
 
