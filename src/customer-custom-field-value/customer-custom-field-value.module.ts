@@ -6,6 +6,7 @@ import {
   CustomerCustomFieldValue,
   CustomerCustomFieldValueSchema,
 } from './schemas/customer-custom-field-value.schema';
+import {CustomerCustomFieldValueMapper} from './customer-custom-field-value.mapper';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import {
     ]),
   ],
   controllers: [CustomerCustomFieldValueController],
-  providers: [CustomerCustomFieldValueService],
+  providers: [CustomerCustomFieldValueService, CustomerCustomFieldValueMapper],
 })
 export class CustomerCustomFieldValueModule {}

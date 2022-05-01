@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {CustomerCustomFieldValueService} from './customer-custom-field-value.service';
-import {CreateCustomerCustomFieldValueDto} from './dto/create-customer-custom-field-value.dto';
-import {UpdateCustomerCustomFieldValueDto} from './dto/update-customer-custom-field-value.dto';
+import {CreateCustomerCustomFieldValueRequestDto} from './dto/request/create-customer-custom-field-value-request.dto';
+import {UpdateCustomerCustomFieldValueRequestDto} from './dto/request/update-customer-custom-field-value-request.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './customer-custom-field.docs';
 
@@ -13,7 +13,7 @@ export class CustomerCustomFieldValueController {
   @Post()
   @docs.createCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 생성')
   createCustomerCustomFieldValue(
-    @Body() createCustomerCustomFieldValueDto: CreateCustomerCustomFieldValueDto,
+    @Body() createCustomerCustomFieldValueDto: CreateCustomerCustomFieldValueRequestDto,
   ) {
     return this.customerCustomFieldValueService.createCustomerCustomFieldValue(
       createCustomerCustomFieldValueDto,
@@ -44,7 +44,7 @@ export class CustomerCustomFieldValueController {
   @docs.updateCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 업데이트')
   updateCustomerCustomFieldValue(
     @Param('id') id: string,
-    @Body() updateCustomerCustomFieldValueDto: UpdateCustomerCustomFieldValueDto,
+    @Body() updateCustomerCustomFieldValueDto: UpdateCustomerCustomFieldValueRequestDto,
   ) {
     return this.customerCustomFieldValueService.updateCustomerCustomFieldValue(
       id,
