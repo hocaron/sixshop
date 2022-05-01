@@ -1,12 +1,9 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {BaseGetReponseBodyDto} from '../../common/dto/base-get-response-body.dto';
+import {BasePostReponseBodyDto} from '../../../common/dto/base-post-response-body.dto';
 import {Store} from 'src/store/schemas/store.schema';
 import {Category} from 'src/category/schemas/category.schema';
 
-export class GetProductResponseDto {
-  @ApiProperty({example: 'a1s2d3f4g5', description: '상품 ID'})
-  _id: string;
-
+export class CreateProductRequestDto {
   @ApiProperty({example: '옷', description: '상품 이름'})
   name: string;
 
@@ -18,9 +15,4 @@ export class GetProductResponseDto {
 
   @ApiProperty({example: '[1a2s3d4f]', description: '카테고리들 ID'})
   categoryIds: Category[];
-}
-
-export class GetProductResponseBodyDto extends BaseGetReponseBodyDto {
-  @ApiProperty()
-  data: GetProductResponseDto;
 }

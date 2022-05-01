@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {CustomerService} from './customer.service';
-import {CreateCustomerDto} from './dto/request/create-customer.dto';
-import {UpdateCustomerDto} from './dto/request/update-customer.dto';
+import {CreateCustomerRequestDto} from './dto/request/create-customer-request.dto';
+import {UpdateCustomerRequestDto} from './dto/request/update-customer-request.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './customer.docs';
 
@@ -12,8 +12,8 @@ export class CustomerController {
 
   @Post()
   @docs.createCustomer('고객 생성')
-  createCustomer(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.customerService.createCustomer(createCustomerDto);
+  createCustomer(@Body() createCustomerRequestDto: CreateCustomerRequestDto) {
+    return this.customerService.createCustomer(createCustomerRequestDto);
   }
 
   @Get(':id')
@@ -24,7 +24,7 @@ export class CustomerController {
 
   @Patch(':id')
   @docs.updateCustomer('ID로 고객 정보 업데이트')
-  updateCustomer(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
+  updateCustomer(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerRequestDto) {
     return this.customerService.updateCustomer(id, updateCustomerDto);
   }
 

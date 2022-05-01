@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {ProductService} from './product.service';
-import {CreateProductDto} from './dto/create-product.dto';
-import {UpdateProductDto} from './dto/update-product.dto';
+import {CreateProductRequestDto} from './dto/request/create-product-request.dto';
+import {UpdateProductRequestDto} from './dto/request/update-product-request.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './product.docs';
 
@@ -12,7 +12,7 @@ export class ProductController {
 
   @Post()
   @docs.createProduct('상품 생성')
-  createProduct(@Body() createProductDto: CreateProductDto) {
+  createProduct(@Body() createProductDto: CreateProductRequestDto) {
     return this.productService.createProduct(createProductDto);
   }
 
@@ -30,7 +30,7 @@ export class ProductController {
 
   @Patch(':id')
   @docs.updateProduct('ID로 상품 정보 업데이트')
-  updateProduct(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+  updateProduct(@Param('id') id: string, @Body() updateProductDto: UpdateProductRequestDto) {
     return this.productService.updateProduct(id, updateProductDto);
   }
 

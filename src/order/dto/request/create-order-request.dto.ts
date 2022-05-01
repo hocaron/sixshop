@@ -5,7 +5,7 @@ import {Product} from 'src/product/schemas/product.schema';
 import {IsEnum} from 'class-validator';
 import {Status} from '../../schemas/order.schema';
 
-export class CreateOrderDto {
+export class CreateOrderRequestDto {
   @IsEnum(Status)
   @ApiProperty({example: 'ORDER', enum: Status, description: '주문 상태'})
   status: Status;

@@ -1,7 +1,7 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {BasePostReponseBodyDto} from '../../../common/dto/base-post-response-body.dto';
 
-export class CreateCustomerDto {
+export class CreateCustomerRequestDto {
   @ApiProperty({example: '식스샵', description: '고객 이름'})
   name: string;
 

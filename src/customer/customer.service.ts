@@ -1,6 +1,6 @@
 import {Injectable, HttpException} from '@nestjs/common';
-import {CreateCustomerDto} from './dto/request/create-customer.dto';
-import {UpdateCustomerDto} from './dto/request/update-customer.dto';
+import {CreateCustomerRequestDto} from './dto/request/create-customer-request.dto';
+import {UpdateCustomerRequestDto} from './dto/request/update-customer-request.dto';
 import {InjectModel} from '@nestjs/mongoose';
 import {Customer, CustomerDocument} from 'src/customer/schemas/customer.schema';
 import {Model} from 'mongoose';
@@ -15,15 +15,17 @@ export class CustomerService {
     private readonly mapper: CustomerMapper,
   ) {}
 
-  async createCustomer(createCustomerDto: CreateCustomerDto): Promise<CustomerResponseDto> {
-    if (await this.findByEmail(createCustomerDto.email)) {
+  async createCustomer(
+    createCustomerRequestDto: CreateCustomerRequestDto,
+  ): Promise<CustomerResponseDto> {
+    if (await this.findByEmail(createCustomerRequestDto.email)) {
       throw new HttpException(
         Err.CUSTOMER.ALREADY_EXISTING_CUSTOMER.message,
         Err.CUSTOMER.ALREADY_EXISTING_CUSTOMER.status,
       );
     }
     // TODO, 없으면 암호화를 해서 유저를 생성
-    return this.mapper.toResponse(await new this.customerModel(createCustomerDto).save());
+    return this.mapper.toResponse(await new this.customerModel(createCustomerRequestDto).save());
   }
 
   async getCustomer(id: string): Promise<CustomerResponseDto> {
@@ -33,7 +35,7 @@ export class CustomerService {
 
   async updateCustomer(
     id: string,
-    updateCustomerDto: UpdateCustomerDto,
+    updateCustomerDto: UpdateCustomerRequestDto,
   ): Promise<CustomerResponseDto> {
     const existingCustomer = await this.checkAndFindById(id);
     await existingCustomer.updateOne(updateCustomerDto).exec();
