@@ -35,6 +35,10 @@ export const Err = {
       statusCode: 400,
       message: '존재하지 않는 고객입니다.',
     },
+    ALREADY_EXISTING_CUSTOMER: {
+      status: 400,
+      message: '이미 존재하는 고객입니다.',
+    },
   },
   ORDER: {
     NOT_FOUND_ORDER: {
