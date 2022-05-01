@@ -1,9 +1,9 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {OrderService} from './order.service';
-import {CreateOrderDto, CreateOrderResponseDto} from './dto/create-order.dto';
-import {UpdateOrderDto} from './dto/update-order.dto';
+import {UpdateOrderDto} from './dto/request/update-order.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './order.docs';
+import {CreateOrderDto} from './dto/request/create-order.dto';
 
 @ApiTags('order')
 @Controller('order')
@@ -12,7 +12,7 @@ export class OrderController {
 
   @Post()
   @docs.createOrder('주문 생성')
-  createOrder(@Body() createOrderDto: CreateOrderDto): Promise<CreateOrderResponseDto> {
+  createOrder(@Body() createOrderDto: CreateOrderDto) {
     return this.orderService.createOrder(createOrderDto);
   }
 

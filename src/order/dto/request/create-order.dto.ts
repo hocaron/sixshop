@@ -1,15 +1,11 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {BaseGetReponseBodyDto} from '../../common/dto/base-get-response-body.dto';
-import {IsEnum} from 'class-validator';
-import {Status} from '../schemas/order.schema';
 import {Store} from 'src/store/schemas/store.schema';
 import {Customer} from 'src/customer/schemas/customer.schema';
 import {Product} from 'src/product/schemas/product.schema';
+import {IsEnum} from 'class-validator';
+import {Status} from '../../schemas/order.schema';
 
-export class GetOrderResponseDto {
-  @ApiProperty({example: 'a1s2d3f4g5', description: '상점 ID'})
-  _id: string;
-
+export class CreateOrderDto {
   @IsEnum(Status)
   @ApiProperty({example: 'ORDER', enum: Status, description: '주문 상태'})
   status: Status;
@@ -25,9 +21,4 @@ export class GetOrderResponseDto {
 
   @ApiProperty({example: 'sixshop', description: '상품들 ID'})
   productIds: Product[];
-}
-
-export class GetOrderResponseBodyDto extends BaseGetReponseBodyDto {
-  @ApiProperty()
-  data: GetOrderResponseDto;
 }
