@@ -42,7 +42,7 @@ export class CategoryService {
   async deleteCategory(id: string): Promise<string> {
     const existingCategory = await this.checkAndFindById(id);
     existingCategory.deleteOne({id});
-    return '${id} 삭제에 성공하였습니다.';
+    return `${id} 삭제에 성공하였습니다.`;
   }
 
   private async findById(id: string) {

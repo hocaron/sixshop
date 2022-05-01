@@ -13,10 +13,10 @@ export class CustomerCustomFieldValueController {
   @Post()
   @docs.createCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 생성')
   createCustomerCustomFieldValue(
-    @Body() createCustomerCustomFieldValueDto: CreateCustomerCustomFieldValueRequestDto,
+    @Body() createCustomerCustomFieldValueRequestDto: CreateCustomerCustomFieldValueRequestDto,
   ) {
     return this.customerCustomFieldValueService.createCustomerCustomFieldValue(
-      createCustomerCustomFieldValueDto,
+      createCustomerCustomFieldValueRequestDto,
     );
   }
 
@@ -44,11 +44,11 @@ export class CustomerCustomFieldValueController {
   @docs.updateCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 업데이트')
   updateCustomerCustomFieldValue(
     @Param('id') id: string,
-    @Body() updateCustomerCustomFieldValueDto: UpdateCustomerCustomFieldValueRequestDto,
+    @Body() updateCustomerCustomFieldValueRequestDto: UpdateCustomerCustomFieldValueRequestDto,
   ) {
     return this.customerCustomFieldValueService.updateCustomerCustomFieldValue(
       id,
-      updateCustomerCustomFieldValueDto,
+      updateCustomerCustomFieldValueRequestDto,
     );
   }
 

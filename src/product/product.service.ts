@@ -49,7 +49,7 @@ export class ProductService {
   async deleteProduct(id: string): Promise<string> {
     const existingProduct = await this.checkAndFindById(id);
     existingProduct.deleteOne({id});
-    return '삭제에 성공하였습니다.';
+    return `${id} 삭제에 성공하였습니다.`;
   }
 
   private async findById(id: string) {

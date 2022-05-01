@@ -64,7 +64,7 @@ export class CustomFieldService {
   async deleteCustomField(id: string): Promise<string> {
     const existingCustomField = await this.checkAndFindById(id);
     existingCustomField.deleteOne({id});
-    return '삭제에 성공하였습니다.';
+    return `${id} 삭제에 성공하였습니다.`;
   }
 
   private async findById(id: string) {

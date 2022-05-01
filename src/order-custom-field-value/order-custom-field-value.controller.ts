@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {OrderCustomFieldValueService} from './order-custom-field-value.service';
-import {CreateOrderCustomFieldValueDto} from './dto/create-order-custom-field-value.dto';
-import {UpdateOrderCustomFieldValueDto} from './dto/update-order-custom-field-value.dto';
+import {CreateOrderCustomFieldValueRequestDto} from './dto/request/create-order-custom-field-value-request.dto';
+import {UpdateOrderCustomFieldValueRequestDto} from './dto/request/update-order-custom-field-value-request.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './order-custom-field.docs';
 
@@ -13,10 +13,10 @@ export class OrderCustomFieldValueController {
   @Post()
   @docs.createOrderCustomFieldValue('주문 관련 사용자 정의 필드값 생성')
   createOrderCustomFieldValue(
-    @Body() createOrderCustomFieldValueDto: CreateOrderCustomFieldValueDto,
+    @Body() createOrderCustomFieldValueRequestDto: CreateOrderCustomFieldValueRequestDto,
   ) {
     return this.orderCustomFieldValueService.createOrderCustomFieldValue(
-      createOrderCustomFieldValueDto,
+      createOrderCustomFieldValueRequestDto,
     );
   }
 
@@ -42,11 +42,11 @@ export class OrderCustomFieldValueController {
   @docs.updateOrderCustomFieldValue('주문 관련 사용자 정의 필드값 업데이트')
   updateOrderCustomFieldValue(
     @Param('id') id: string,
-    @Body() updateOrderCustomFieldValueDto: UpdateOrderCustomFieldValueDto,
+    @Body() updateOrderCustomFieldValueRequestDto: UpdateOrderCustomFieldValueRequestDto,
   ) {
     return this.orderCustomFieldValueService.updateOrderCustomFieldValue(
       id,
-      updateOrderCustomFieldValueDto,
+      updateOrderCustomFieldValueRequestDto,
     );
   }
 

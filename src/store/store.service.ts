@@ -40,7 +40,7 @@ export class StoreService {
   async deleteStore(id: string): Promise<string> {
     const existingStore = await this.checkAndFindById(id);
     existingStore.deleteOne({id});
-    return '삭제에 성공하였습니다.';
+    return `${id} 삭제에 성공하였습니다.`;
   }
 
   private async findById(id: string) {

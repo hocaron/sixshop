@@ -1,14 +1,15 @@
 import {Injectable} from '@nestjs/common';
-import {Customer} from './schemas/customer.schema';
-import {CustomerResponseDto} from './dto/response/customer-response.dto';
+import {ProductCustomFieldValue} from './schemas/product-custom-field-value.schema';
+import {ProductCustomFieldValueResponseDto} from './dto/response/product-custom-field-value-response.dto';
 
 @Injectable()
-export class CustomerMapper {
-  toResponse(entity: Customer): CustomerResponseDto {
+export class ProductCustomFieldValueMapper {
+  toResponse(entity: ProductCustomFieldValue): ProductCustomFieldValueResponseDto {
     return {
       _id: entity.id,
-      name: entity.name,
-      email: entity.email,
+      value: entity.value,
+      productId: entity.productId,
+      customFieldId: entity.customFieldId,
     };
   }
 }

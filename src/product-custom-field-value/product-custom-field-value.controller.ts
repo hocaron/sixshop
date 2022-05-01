@@ -1,9 +1,9 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import {ProductCustomFieldValueService} from './product-custom-field-value.service';
-import {CreateProductCustomFieldValueDto} from './dto/create-product-custom-field-value.dto';
-import {UpdateProductCustomFieldValueDto} from './dto/update-product-custom-field-value.dto';
 import {ApiTags} from '@nestjs/swagger';
 import {docs} from './product-custom-field.docs';
+import {CreateProductCustomFieldValueRequestDto} from './dto/request/create-product-custom-field-value-request.dto';
+import {UpdateProductCustomFieldValueRequestDto} from './dto/request/update-product-custom-field-value-request.dto';
 
 @ApiTags('product-custom-field-value')
 @Controller('product-custom-field-value')
@@ -13,10 +13,10 @@ export class ProductCustomFieldValueController {
   @Post()
   @docs.createProductCustomFieldValue('상품 관련 사용자 정의 필드값 생성')
   createProductCustomFieldValue(
-    @Body() createProductCustomFieldValueDto: CreateProductCustomFieldValueDto,
+    @Body() createProductCustomFieldValueRequestDto: CreateProductCustomFieldValueRequestDto,
   ) {
     return this.productCustomFieldValueService.createProductCustomFieldValue(
-      createProductCustomFieldValueDto,
+      createProductCustomFieldValueRequestDto,
     );
   }
 
@@ -42,11 +42,11 @@ export class ProductCustomFieldValueController {
   @docs.updateProductCustomFieldValue('상품 관련 사용자 정의 필드값 업데이트')
   updateProductCustomFieldValue(
     @Param('id') id: string,
-    @Body() updateProductCustomFieldValueDto: UpdateProductCustomFieldValueDto,
+    @Body() updateProductCustomFieldValueRequestDto: UpdateProductCustomFieldValueRequestDto,
   ) {
     return this.productCustomFieldValueService.updateProductCustomFieldValue(
       id,
-      updateProductCustomFieldValueDto,
+      updateProductCustomFieldValueRequestDto,
     );
   }
 
