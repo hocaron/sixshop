@@ -1,5 +1,4 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {BasePostReponseBodyDto} from '../../../common/dto/base-post-response-body.dto';
 import {Store} from 'src/store/schemas/store.schema';
 import {Category} from 'src/category/schemas/category.schema';
 

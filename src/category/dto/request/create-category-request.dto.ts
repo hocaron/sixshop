@@ -1,5 +1,4 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {BasePostReponseBodyDto} from '../../../common/dto/base-post-response-body.dto';
 
 export class CreateCategoryRequestDto {
   @ApiProperty({example: '의류', description: '카테고리 이름'})

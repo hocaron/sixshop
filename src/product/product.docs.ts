@@ -4,7 +4,7 @@ import {BaseDeleteResponseBodyDto} from '../common/dto/base-delete-response-body
 import {SwaggerMethodDoc} from '../common/types';
 import {ProductController} from './product.controller';
 import {ProductsResponseBodyDto} from './dto/response/products-response-body.dto';
-import {ProductReponseBodyDto} from './dto/response/product-reponse-body.dto';
+import {ProductResponseBodyDto} from './dto/response/product-response-body.dto';
 
 export const docs: SwaggerMethodDoc<ProductController> = {
   createProduct(summary: string) {
@@ -14,7 +14,7 @@ export const docs: SwaggerMethodDoc<ProductController> = {
         description: '상품을 생성합니다.',
       }),
       ApiCreatedResponse({
-        type: ProductReponseBodyDto,
+        type: ProductResponseBodyDto,
       }),
     );
   },
@@ -36,7 +36,7 @@ export const docs: SwaggerMethodDoc<ProductController> = {
         description: 'ID로 상품을 조회합니다.',
       }),
       ApiOkResponse({
-        type: ProductReponseBodyDto,
+        type: ProductResponseBodyDto,
       }),
       ApiResponse({
         status: 400,
@@ -51,7 +51,7 @@ export const docs: SwaggerMethodDoc<ProductController> = {
         description: 'ID로 상품 정보을 업데이트합니다.',
       }),
       ApiOkResponse({
-        type: ProductReponseBodyDto,
+        type: ProductResponseBodyDto,
       }),
       ApiResponse({
         status: 400,

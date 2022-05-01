@@ -1,8 +1,8 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {StoreResponseDto} from './store-response.dto';
-import {BaseGetReponseBodyDto} from '../../../common/dto/base-get-response-body.dto';
+import {BaseGetResponseBodyDto} from '../../../common/dto/base-get-response-body.dto';
 
-export class StoresResponseBodyDto extends BaseGetReponseBodyDto {
+export class StoresResponseBodyDto extends BaseGetResponseBodyDto {
   @ApiProperty({type: [StoreResponseDto]})
   data: StoreResponseDto[];
 }

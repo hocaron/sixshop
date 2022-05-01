@@ -6,7 +6,6 @@ import {CustomField, CustomFieldDocument} from './schemas/custom-field.schema';
 import {Model} from 'mongoose';
 import {Err} from './../common/error';
 import {CustomFieldResponseDto} from './dto/response/custom-field-response.dto';
-import {CategoryMapper} from '../category/category.mapper';
 import {CustomFieldMapper} from './custom-field.mapper';
 
 @Injectable()
