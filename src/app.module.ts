@@ -16,6 +16,7 @@ import {CustomerCustomFieldValueModule} from './customer-custom-field-value/cust
 import {OrderCustomFieldValueModule} from './order-custom-field-value/order-custom-field-value.module';
 import {ProductCustomFieldValueModule} from './product-custom-field-value/product-custom-field-value.module';
 import mongoConfig from './common/config/mongo.config';
+import {LogInterceptor} from './common/interceptors/log.interceptor';
 
 @Module({
   imports: [
@@ -48,6 +49,10 @@ import mongoConfig from './common/config/mongo.config';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LogInterceptor,
     },
   ],
 })
