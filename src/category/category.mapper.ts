@@ -6,7 +6,7 @@ import {Category} from './schemas/category.schema';
 export class CategoryMapper {
   toResponse(entity: Category): CategoryResponseDto {
     return {
-      _id: entity.id,
+      id: entity._id,
       name: entity.name,
       description: entity.description,
     };
