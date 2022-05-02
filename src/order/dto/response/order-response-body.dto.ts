@@ -1,8 +1,8 @@
-import {BaseGetResponseBodyDto} from '../../../common/dto/base-get-response-body.dto';
+import {BaseResponseBodyDto} from './../../../common/dto/base-response-body.dto';
 import {ApiProperty} from '@nestjs/swagger';
 import {OrderResponseDto} from './order-response.dto';
 
-export class OrderResponseBodyDto extends BaseGetResponseBodyDto {
+export class OrderResponseBodyDto extends BaseResponseBodyDto {
   @ApiProperty()
   data: OrderResponseDto;
 }
