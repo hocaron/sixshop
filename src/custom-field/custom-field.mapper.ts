@@ -6,7 +6,7 @@ import {CustomFieldResponseDto} from './dto/response/custom-field-response.dto';
 export class CustomFieldMapper {
   toResponse(entity: CustomField): CustomFieldResponseDto {
     return {
-      _id: entity.id,
+      id: entity._id,
       name: entity.name,
       arrayValue: entity.arrayValue,
       fieldType: entity.fieldType,
