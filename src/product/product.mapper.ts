@@ -6,7 +6,7 @@ import {ProductResponseDto} from './dto/response/product-response.dto';
 export class ProductMapper {
   toResponse(entity: Product): ProductResponseDto {
     return {
-      _id: entity.id,
+      id: entity._id,
       name: entity.name,
       price: entity.price,
       storeId: entity.storeId,

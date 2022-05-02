@@ -29,7 +29,7 @@ export class ProductService {
         Err.PRODUCT.NOT_FOUND_PRODUCT.statusCode,
       );
     }
-    return existingProducts;
+    return existingProducts.map(product => this.mapper.toResponse(product));
   }
 
   async getProduct(id: string): Promise<ProductResponseDto> {
