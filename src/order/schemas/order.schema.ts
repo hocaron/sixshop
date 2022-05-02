@@ -14,8 +14,7 @@ export enum Status {
 
 @Schema()
 export class Order {
-  @Prop()
-  id: string;
+  _id: mongoose.Types.ObjectId;
 
   @Prop()
   status: Status;

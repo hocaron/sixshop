@@ -6,7 +6,7 @@ import {OrderResponseDto} from './dto/response/order-response.dto';
 export class OrderMapper {
   toResponse(entity: Order): OrderResponseDto {
     return {
-      _id: entity.id,
+      id: entity._id,
       status: entity.status,
       price: entity.price,
       storeId: entity.storeId,
