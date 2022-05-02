@@ -70,4 +70,10 @@ export const Err = {
       message: '존재하지 않는 상품 관련 사용자 정의 필드값입니다.',
     },
   },
+  SERVER: {
+    UNEXPECTED_ERROR: {
+      statusCode: 500,
+      message: '서버에러가 발생하였습니다..',
+    },
+  },
 } as const;

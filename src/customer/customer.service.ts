@@ -7,6 +7,7 @@ import {Model} from 'mongoose';
 import {Err} from './../common/error';
 import {CustomerMapper} from './customer.mapper';
 import {CustomerResponseDto} from './dto/response/customer-response.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CustomerService {
@@ -24,7 +25,7 @@ export class CustomerService {
         Err.CUSTOMER.ALREADY_EXISTING_CUSTOMER.status,
       );
     }
-    // TODO, 없으면 암호화를 해서 유저를 생성
+    createCustomerRequestDto.password = await this.hashPassword(createCustomerRequestDto.password);
     return this.mapper.toResponse(await new this.customerModel(createCustomerRequestDto).save());
   }
 
@@ -65,5 +66,17 @@ export class CustomerService {
       );
     }
     return customer;
+  }
+
+  private async hashPassword(password: string): Promise<string> {
+    try {
+      const salt = await bcrypt.genSalt();
+      return await bcrypt.hash(password, salt);
+    } catch (e) {
+      throw new HttpException(
+        Err.SERVER.UNEXPECTED_ERROR.message,
+        Err.SERVER.UNEXPECTED_ERROR.statusCode,
+      );
+    }
   }
 }
