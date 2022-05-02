@@ -1,73 +1,78 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# 식스샵 스토어프론트팀 백엔드 개발자 과제
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<br>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🔨 기술 스택
 
-## Description
+|         Backend (API)         |         
+| :---------------------------: | 
+| ![Nestjs](https://img.shields.io/badge/nestjs-white?style=flat-square&logo=nestjs&color=E0234E) ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazon-aws&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white) ![MySQL](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<br>
 
-## Installation
+## 🛠️ 개발 서버
+http://3.34.45.57/api/v1
 
-```bash
+<br>
+
+## 📖 API 문서
+http://3.34.45.57/api/v1/docs/
+
+<br>
+ 
+## 🌱 시작하기
+`node: 14.16.0`  
+`npm: 6.14.11`
+
+### 1. Clone 해주세요.
+```
+$ git clone https://github.com/hocaron/sixshop.git
+$ cd sixshop
 $ npm install
 ```
 
-## Running the app
+<br>
 
-```bash
-# development
-$ npm run start
+### 2.1 **도커 컴포즈로** 프로젝트 시작하기는 다음을 참고해주세요.
 
-# watch mode
-$ npm run start:dev
+#### MongoDB와 서버 컨테이너를 생성합니다.
+<br>
 
-# production mode
-$ npm run start:prod
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+$ docker compose -f "docker-compose.yml" up -d --build                            
 ```
+- 도커에서 sixshop api-server는 3001번 포트로 포워딩 됩니다.
+- `http://localhost:3001/api/v1`로 요청보내주세요.
 
-## Support
+<br>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 2.2 **`npm run start`를 활용하여** 프로젝트 시작하기는 다음을 참고해주세요.
 
-## Stay in touch
+#### 환경변수 설정을 위해, `.env.dev`파일을 생성합니다.
+```
+MONGO_URI=<연결할 MongoDB URI를 입력해주세요>
+```
+- 원하는 MongoDB로 연결할 수 있습니다.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<br>
 
-## License
+#### 스크립트를 이용해, 서버를 띄웁니다.
+```
+$ npm run start                         
+```
+- 로컬에서 sixshop api-server는 3000번 포트로 포워딩 됩니다.
+- `http://localhost:3000/api/v1`로 요청보내주세요.
 
-Nest is [MIT licensed](LICENSE).
+<br>
+
+## 🌸 아키텍쳐
+### Server 아키텍쳐
+![image](https://user-images.githubusercontent.com/66551410/166333083-fb8de423-169d-443e-83c1-32e838b285b7.png)
+
+### CICD 아키텍쳐
+![image](https://user-images.githubusercontent.com/66551410/152016992-cff6b052-35d7-416e-868c-b2702a3ef692.png)
+
+### MongoDB ERD
+![image](https://user-images.githubusercontent.com/66551410/166337715-8fc4d9f4-69b9-497e-923c-347ec0ff7f1f.png)
+
+
