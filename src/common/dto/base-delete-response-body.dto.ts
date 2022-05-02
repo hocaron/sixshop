@@ -1,7 +1,7 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {BaseGetResponseBodyDto} from './base-get-response-body.dto';
+import {BaseResponseBodyDto} from './base-response-body.dto';
 
-export class BaseDeleteResponseBodyDto extends BaseGetResponseBodyDto {
+export class BaseDeleteResponseBodyDto extends BaseResponseBodyDto {
   @ApiProperty({example: 'id 삭제에 성공하였습니다.'})
   data;
 }
