@@ -8,8 +8,7 @@ export type OrderCustomFieldValueDocument = OrderCustomFieldValue & Document;
 
 @Schema()
 export class OrderCustomFieldValue {
-  @Prop()
-  id: string;
+  _id: mongoose.Types.ObjectId;
 
   @Prop({type: mongoose.Schema.Types.Mixed})
   value: any;

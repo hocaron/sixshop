@@ -40,7 +40,7 @@ export class OrderCustomFieldValueService {
         Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.statusCode,
       );
     }
-    return existingOrderCustomField;
+    return this.mapper.toResponse(existingOrderCustomField);
   }
 
   async getAllOrderCustomFieldValueInStore(
@@ -55,7 +55,7 @@ export class OrderCustomFieldValueService {
         Err.ORDER_CUSTOM_FIELD.NOT_FOUND_ORDER_CUSTOM_FIELD.statusCode,
       );
     }
-    return existingOrderCustomFields;
+    return existingOrderCustomFields.map(customfield => this.mapper.toResponse(customfield));
   }
 
   async updateOrderCustomFieldValue(
