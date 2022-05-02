@@ -3,13 +3,11 @@ import {Request, Response} from 'express';
 import {Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {v4 as uuid} from 'uuid';
-import {clone} from 'ramda';
 
 @Injectable()
 export class LogInterceptor implements NestInterceptor {
   private requestLogger = new Logger('HTTP_REQUEST');
   private responseLogger = new Logger('HTTP_RESPONSE');
-  constructor() {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const executionId = uuid();
