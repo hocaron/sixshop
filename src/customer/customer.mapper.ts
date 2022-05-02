@@ -6,7 +6,7 @@ import {CustomerResponseDto} from './dto/response/customer-response.dto';
 export class CustomerMapper {
   toResponse(entity: Customer): CustomerResponseDto {
     return {
-      _id: entity.id,
+      id: entity._id,
       name: entity.name,
       email: entity.email,
     };
