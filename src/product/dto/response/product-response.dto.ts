@@ -1,10 +1,11 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {Store} from 'src/store/schemas/store.schema';
 import {Category} from 'src/category/schemas/category.schema';
+import mongoose from 'mongoose';
 
 export class ProductResponseDto {
   @ApiProperty({example: 'a1s2d3f4g5', description: '상품 ID'})
-  _id: string;
+  id: mongoose.Types.ObjectId;
 
   @ApiProperty({example: '옷', description: '상품 이름'})
   name: string;

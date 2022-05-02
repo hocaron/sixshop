@@ -1,10 +1,11 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {CustomField} from '../../../custom-field/schemas/custom-field.schema';
 import {Product} from '../../../product/schemas/product.schema';
+import mongoose from 'mongoose';
 
 export class ProductCustomFieldValueResponseDto {
   @ApiProperty({example: 'a1s2d3f4g5', description: '사용자 정의 필드 ID'})
-  _id: string;
+  id: mongoose.Types.ObjectId;
 
   @ApiProperty({example: '유통기한', description: '상품 관련 사용자 정의 필드의 값'})
   value: string;

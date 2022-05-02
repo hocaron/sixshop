@@ -4,10 +4,11 @@ import {ApiProperty} from '@nestjs/swagger';
 import {Store} from '../../../store/schemas/store.schema';
 import {Customer} from '../../../customer/schemas/customer.schema';
 import {Product} from '../../../product/schemas/product.schema';
+import mongoose from 'mongoose';
 
 export class OrderResponseDto {
   @ApiProperty({example: 'a1s2d3f4g5', description: '상점 ID'})
-  _id: string;
+  id: mongoose.Types.ObjectId;
 
   @IsEnum(Status)
   @ApiProperty({example: 'ORDER', enum: Status, description: '주문 상태'})

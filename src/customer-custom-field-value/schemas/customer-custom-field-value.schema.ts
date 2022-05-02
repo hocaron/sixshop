@@ -8,8 +8,7 @@ export type CustomerCustomFieldValueDocument = CustomerCustomFieldValue & Docume
 
 @Schema()
 export class CustomerCustomFieldValue {
-  @Prop()
-  id: string;
+  _id: mongoose.Types.ObjectId;
 
   @Prop({type: mongoose.Schema.Types.Mixed})
   value: any;

@@ -6,7 +6,7 @@ import {CustomerCustomFieldValue} from './schemas/customer-custom-field-value.sc
 export class CustomerCustomFieldValueMapper {
   toResponse(entity: CustomerCustomFieldValue): CustomerCustomFieldValueResponseDto {
     return {
-      _id: entity.id,
+      id: entity._id,
       value: entity.value,
       customerId: entity.customerId,
       customFieldId: entity.customFieldId,

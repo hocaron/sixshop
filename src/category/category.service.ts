@@ -21,8 +21,10 @@ export class CategoryService {
     return this.mapper.toResponse(await new this.categoryModel(createCategoryRequestDto).save());
   }
 
-  getAllCategories(): Promise<CategoryResponseDto[]> {
-    return this.categoryModel.find().exec();
+  async getAllCategories(): Promise<CategoryResponseDto[]> {
+    return (await this.categoryModel.find().exec()).map(customfield =>
+      this.mapper.toResponse(customfield),
+    );
   }
 
   async getCategory(id: string): Promise<CategoryResponseDto> {

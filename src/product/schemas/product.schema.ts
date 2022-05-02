@@ -8,8 +8,7 @@ export type ProductDocument = Product & Document;
 
 @Schema()
 export class Product {
-  @Prop()
-  id: string;
+  _id: mongoose.Types.ObjectId;
 
   @Prop()
   name: string;

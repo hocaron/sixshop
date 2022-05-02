@@ -40,22 +40,22 @@ export class CustomerCustomFieldValueService {
         Err.CUSTOMER_CUSTOM_FIELD.NOT_FOUND_CUSTOMER_CUSTOM_FIELD.statusCode,
       );
     }
-    return existingCustomerCustomField;
+    return this.mapper.toResponse(existingCustomerCustomField);
   }
 
   async getAllCustomerCustomFieldValueInStore(
     customFieldId: string,
   ): Promise<CustomerCustomFieldValueResponseDto[]> {
-    const existingCustomerCustomField = await this.customerCustomFieldValueModel
+    const existingCustomerCustomFields = await this.customerCustomFieldValueModel
       .find({customFieldId})
       .exec();
-    if (!existingCustomerCustomField) {
+    if (!existingCustomerCustomFields) {
       throw new HttpException(
         Err.CUSTOMER_CUSTOM_FIELD.NOT_FOUND_CUSTOMER_CUSTOM_FIELD.message,
         Err.CUSTOMER_CUSTOM_FIELD.NOT_FOUND_CUSTOMER_CUSTOM_FIELD.statusCode,
       );
     }
-    return existingCustomerCustomField;
+    return existingCustomerCustomFields.map(customfield => this.mapper.toResponse(customfield));
   }
 
   async updateCustomerCustomFieldValue(

@@ -1,9 +1,10 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {CustomField} from '../../../custom-field/schemas/custom-field.schema';
+import mongoose from 'mongoose';
 
 export class StoreResponseDto {
   @ApiProperty({example: 'a1s2d3f4g5', description: '상점 ID'})
-  _id: string;
+  id: mongoose.Types.ObjectId;
 
   @ApiProperty({example: 'sixshop', description: '상점 이름'})
   name: string;

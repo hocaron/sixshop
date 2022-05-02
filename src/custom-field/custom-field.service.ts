@@ -39,8 +39,10 @@ export class CustomFieldService {
     return this.mapper.toResponse(await new this.customFieldModel(createCustomFieldDto).save());
   }
 
-  getAllCustomField(): Promise<CustomFieldResponseDto[]> {
-    return this.customFieldModel.find().exec();
+  async getAllCustomField(): Promise<CustomFieldResponseDto[]> {
+    return (await this.customFieldModel.find().exec()).map(customfield =>
+      this.mapper.toResponse(customfield),
+    );
   }
 
   async getCustomField(id: string): Promise<CustomFieldResponseDto> {

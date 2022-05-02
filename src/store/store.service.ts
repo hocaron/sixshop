@@ -19,8 +19,10 @@ export class StoreService {
     return this.mapper.toResponse(await new this.storeModel(createStoreDto).save());
   }
 
-  getAllStores(): Promise<StoreResponseDto[]> {
-    return this.storeModel.find().exec();
+  async getAllStores(): Promise<StoreResponseDto[]> {
+    return (await this.storeModel.find().exec()).map(customfield =>
+      this.mapper.toResponse(customfield),
+    );
   }
 
   async getStore(id: string): Promise<StoreResponseDto> {

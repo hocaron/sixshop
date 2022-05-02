@@ -1,6 +1,7 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Document} from 'mongoose';
 import {ArrayValue} from 'src/common/types';
+import mongoose from 'mongoose';
 
 export type CustomFieldDocument = CustomField & Document;
 
@@ -14,8 +15,7 @@ export enum FieldType {
 
 @Schema()
 export class CustomField {
-  @Prop()
-  id: string;
+  _id: mongoose.Types.ObjectId;
 
   @Prop()
   name: string;

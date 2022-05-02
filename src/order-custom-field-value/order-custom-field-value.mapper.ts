@@ -6,7 +6,7 @@ import {OrderCustomFieldValueResponseDto} from './dto/response/order-custom-fiel
 export class OrderCustomFieldValueMapper {
   toResponse(entity: OrderCustomFieldValue): OrderCustomFieldValueResponseDto {
     return {
-      _id: entity.id,
+      id: entity._id,
       value: entity.value,
       orderId: entity.orderId,
       customFieldId: entity.customFieldId,
