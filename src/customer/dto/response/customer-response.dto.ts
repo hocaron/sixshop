@@ -5,7 +5,7 @@ export class CustomerResponseDto {
   @ApiProperty({example: 'a1s2d3f4g5', description: '고객 ID'})
   id: mongoose.Types.ObjectId;
 
-  @ApiProperty({example: 'test', description: '고객 이름'})
+  @ApiProperty({example: 'testCustomer', description: '고객 이름'})
   name: string;
 
   @ApiProperty({example: 'test@email.com', description: '고객 이메일'})

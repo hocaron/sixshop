@@ -16,6 +16,7 @@ export class StoreService {
   ) {}
 
   async createStore(createStoreDto: CreateStoreRequestDto): Promise<StoreResponseDto> {
+    console.log(createStoreDto);
     return this.mapper.toResponse(await new this.storeModel(createStoreDto).save());
   }
 

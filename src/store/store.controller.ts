@@ -23,19 +23,19 @@ export class StoreController {
   }
 
   @Get(':id')
-  @docs.getStore('ID로 상점 조회')
+  @docs.getStore('Id로 상점 조회')
   getStore(@Param('id') id: string) {
     return this.storeService.getStore(id);
   }
 
   @Patch(':id')
-  @docs.updateStore('ID로 상점 정보 업데이트')
+  @docs.updateStore('Id로 상점 정보 업데이트')
   updateStore(@Param('id') id: string, @Body() updateStoreDto: UpdateStoreRequestDto) {
     return this.storeService.updateStore(id, updateStoreDto);
   }
 
   @Delete(':id')
-  @docs.deleteStore('ID로 상점 삭제')
+  @docs.deleteStore('Id로 상점 삭제')
   deleteStore(@Param('id') id: string) {
     return this.storeService.deleteStore(id);
   }

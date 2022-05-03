@@ -9,7 +9,6 @@ export class StoreMapper {
       id: entity._id,
       name: entity.name,
       customerCustomFieldIds: entity.customerCustomFieldIds,
-      productCustomFieldIds: entity.productCustomFieldIds,
       orderCustomFieldIds: entity.orderCustomFieldIds,
     };
   }

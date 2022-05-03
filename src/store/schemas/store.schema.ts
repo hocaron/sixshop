@@ -7,7 +7,6 @@ export type StoreDocument = Store & Document;
 
 @Schema()
 export class Store {
-  @Prop()
   _id: mongoose.Types.ObjectId;
 
   @Prop({unique: true})
@@ -15,9 +14,6 @@ export class Store {
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'}]})
   customerCustomFieldIds: CustomField[];
-
-  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'}]})
-  productCustomFieldIds: CustomField[];
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'}]})
   orderCustomFieldIds: CustomField[];

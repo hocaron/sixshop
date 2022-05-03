@@ -10,7 +10,8 @@ export const docs: SwaggerMethodDoc<OrderController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: '주문을 생성합니다.',
+        description:
+          "주문을 생성합니다. \t\n Status = ['ORDER', 'CANCEL'] \t\n 주문상태 = ORDER : 주문진행 , CANCEL : 주문취소",
       }),
       ApiCreatedResponse({
         type: OrderResponseBodyDto,
@@ -21,7 +22,8 @@ export const docs: SwaggerMethodDoc<OrderController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'Id로 주문을 조회합니다.',
+        description:
+          "Id로 주문을 조회합니다. \t\n Status = ['ORDER', 'CANCEL'] \t\n 주문상태 = ORDER : 주문진행 , CANCEL : 주문취소",
       }),
       ApiOkResponse({
         type: OrderResponseBodyDto,
@@ -36,7 +38,8 @@ export const docs: SwaggerMethodDoc<OrderController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 주문 정보를 업데이트합니다.',
+        description:
+          "Id로 주문 정보를 업데이트합니다. \t\n Status = ['ORDER', 'CANCEL'] \t\n 주문상태 = ORDER : 주문진행 , CANCEL : 주문취소",
       }),
       ApiOkResponse({
         type: OrderResponseBodyDto,
@@ -51,7 +54,7 @@ export const docs: SwaggerMethodDoc<OrderController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 주문을 삭제합니다.',
+        description: 'Id로 주문을 삭제합니다.',
       }),
       ApiOkResponse({
         type: BaseDeleteResponseBodyDto,

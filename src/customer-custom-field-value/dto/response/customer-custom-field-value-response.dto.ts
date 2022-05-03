@@ -7,7 +7,10 @@ export class CustomerCustomFieldValueResponseDto {
   @ApiProperty({example: 'a1s2d3f4g5', description: '사용자 정의 필드 ID'})
   id: mongoose.Types.ObjectId;
 
-  @ApiProperty({example: '01012341234', description: '고객 관련 사용자 정의 필드의 값'})
+  @ApiProperty({
+    example: 'testCustomerCustomFieldValue',
+    description: '고객 관련 사용자 정의 필드의 값',
+  })
   value: string;
 
   @ApiProperty({example: '1a2s3d4f', description: '고객 ID'})

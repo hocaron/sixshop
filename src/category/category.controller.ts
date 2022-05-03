@@ -23,19 +23,19 @@ export class CategoryController {
   }
 
   @Get(':id')
-  @docs.getCategory('ID로 카테고리 조회')
+  @docs.getCategory('Id로 카테고리 조회')
   getCategory(@Param('id') id: string) {
     return this.categoryService.getCategory(id);
   }
 
   @Patch(':id')
-  @docs.updateCategory('ID로 카테고리 정보 업데이트')
+  @docs.updateCategory('Id로 카테고리 정보 업데이트')
   updateCategory(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryRequestDto) {
     return this.categoryService.updateCategory(id, updateCategoryDto);
   }
 
   @Delete(':id')
-  @docs.deleteCategory('ID로 카테고리 식제')
+  @docs.deleteCategory('Id로 카테고리 식제')
   deleteCategory(@Param('id') id: string) {
     return this.categoryService.deleteCategory(id);
   }

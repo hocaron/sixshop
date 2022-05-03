@@ -23,19 +23,19 @@ export class CustomFieldController {
   }
 
   @Get(':id')
-  @docs.getCustomField('ID로 사용자 정의 필드 조회')
+  @docs.getCustomField('Id로 사용자 정의 필드 조회')
   getCustomField(@Param('id') id: string) {
     return this.customFieldService.getCustomField(id);
   }
 
   @Patch(':id')
-  @docs.updateCustomField('ID로 사용자 정의 필드 정보 업데이트')
+  @docs.updateCustomField('Id로 사용자 정의 필드 정보 업데이트')
   updateCustomField(@Param('id') id: string, @Body() updateCustomFieldDto: UpdateCustomFieldDto) {
     return this.customFieldService.updateCustomField(id, updateCustomFieldDto);
   }
 
   @Delete(':id')
-  @docs.deleteCustomField('ID로 사용자 정의 필드 삭제')
+  @docs.deleteCustomField('Id로 사용자 정의 필드 삭제')
   deleteCustomField(@Param('id') id: string) {
     return this.customFieldService.deleteCustomField(id);
   }

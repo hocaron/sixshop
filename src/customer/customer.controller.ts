@@ -17,19 +17,19 @@ export class CustomerController {
   }
 
   @Get(':id')
-  @docs.getCustomer('ID로 고객 조회')
+  @docs.getCustomer('Id로 고객 조회')
   getCustomer(@Param('id') id: string) {
     return this.customerService.getCustomer(id);
   }
 
   @Patch(':id')
-  @docs.updateCustomer('ID로 고객 정보 업데이트')
+  @docs.updateCustomer('Id로 고객 정보 업데이트')
   updateCustomer(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerRequestDto) {
     return this.customerService.updateCustomer(id, updateCustomerDto);
   }
 
   @Delete(':id')
-  @docs.deleteCustomer('ID로 고객 식제')
+  @docs.deleteCustomer('Id로 고객 식제')
   deleteCustomer(@Param('id') id: string) {
     return this.customerService.deleteCustomer(id);
   }
