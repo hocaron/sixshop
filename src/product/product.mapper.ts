@@ -11,6 +11,7 @@ export class ProductMapper {
       price: entity.price,
       storeId: entity.storeId,
       categoryIds: entity.categoryIds,
+      productCustomFieldIds: entity.productCustomFieldIds,
     };
   }
 }
