@@ -33,7 +33,7 @@ export class CustomerCustomFieldValueController {
   }
 
   @Get(':customFieldId')
-  @docs.getAllCustomerCustomFieldValueInStore('고객 관련 사용자 정의 필드값 조회')
+  @docs.getAllCustomerCustomFieldValueInStore('상점내 모든 고객 관련 사용자 정의 필드값 조회')
   getAllCustomerCustomFieldValueInStore(@Param('customFieldId') customFieldId: string) {
     return this.customerCustomFieldValueService.getAllCustomerCustomFieldValueInStore(
       customFieldId,
@@ -41,7 +41,7 @@ export class CustomerCustomFieldValueController {
   }
 
   @Patch(':id')
-  @docs.updateCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 업데이트')
+  @docs.updateCustomerCustomFieldValue('Id로 고객 관련 사용자 정의 필드값 업데이트')
   updateCustomerCustomFieldValue(
     @Param('id') id: string,
     @Body() updateCustomerCustomFieldValueRequestDto: UpdateCustomerCustomFieldValueRequestDto,
@@ -53,7 +53,7 @@ export class CustomerCustomFieldValueController {
   }
 
   @Delete(':id')
-  @docs.deleteCustomerCustomFieldValue('고객 관련 사용자 정의 필드값 삭제')
+  @docs.deleteCustomerCustomFieldValue('Id로 고객 관련 사용자 정의 필드값 삭제')
   deleteCustomerCustomFieldValue(@Param('id') id: string) {
     return this.customerCustomFieldValueService.deleteCustomerCustomFieldValue(id);
   }

@@ -33,7 +33,7 @@ export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
       ApiOperation({
         summary,
         description:
-          'customFieldId로 고객 관련 사용자 정의 필드값를 조회합니다. \t\n customFieldId은 상점마다 유일한 값이므로, 헤당 필드를 상점별로 조회하는 .',
+          'customFieldId로 고객 관련 사용자 정의 필드값를 조회합니다. \t\n customFieldId는 상점마다 유일한 값이므로, 해당 필드 정보를 상점별로 조회하는 것과 같습니다.',
       }),
       ApiOkResponse({
         type: CustomerCustomFieldValuesResponseBodyDto,
@@ -48,7 +48,7 @@ export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 고객 관련 사용자 정의 필드값 정보를 업데이트합니다.',
+        description: 'Id로 고객 관련 사용자 정의 필드값 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
         type: CustomerCustomFieldValueResponseBodyDto,
@@ -63,7 +63,7 @@ export const docs: SwaggerMethodDoc<CustomerCustomFieldValueController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 고객 관련 사용자 정의 필드값를 삭제합니다.',
+        description: 'Id로 고객 관련 사용자 정의 필드값를 삭제합니다.',
       }),
       ApiOkResponse({
         type: BaseDeleteResponseBodyDto,
