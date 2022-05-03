@@ -33,7 +33,7 @@ export const docs: SwaggerMethodDoc<ProductController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 상품을 조회합니다.',
+        description: 'Id로 상품을 조회합니다.',
       }),
       ApiOkResponse({
         type: ProductResponseBodyDto,
@@ -48,7 +48,7 @@ export const docs: SwaggerMethodDoc<ProductController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 상품 정보을 업데이트합니다.',
+        description: 'Id로 상품 정보을 업데이트합니다.',
       }),
       ApiOkResponse({
         type: ProductResponseBodyDto,
@@ -63,7 +63,7 @@ export const docs: SwaggerMethodDoc<ProductController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 상품을 삭제합니다.',
+        description: 'Id로 상품을 삭제합니다.',
       }),
       ApiOkResponse({
         type: BaseDeleteResponseBodyDto,

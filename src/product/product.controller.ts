@@ -23,19 +23,19 @@ export class ProductController {
   }
 
   @Get(':id')
-  @docs.getProduct('ID로 상품 조회')
+  @docs.getProduct('Id로 상품 조회')
   getProduct(@Param('id') id: string) {
     return this.productService.getProduct(id);
   }
 
   @Patch(':id')
-  @docs.updateProduct('ID로 상품 정보 업데이트')
+  @docs.updateProduct('Id로 상품 정보 업데이트')
   updateProduct(@Param('id') id: string, @Body() updateProductDto: UpdateProductRequestDto) {
     return this.productService.updateProduct(id, updateProductDto);
   }
 
   @Delete(':id')
-  @docs.deleteProduct('ID로 상품 삭제')
+  @docs.deleteProduct('Id로 상품 삭제')
   deleteProduct(@Param('id') id: string) {
     return this.productService.deleteProduct(id);
   }

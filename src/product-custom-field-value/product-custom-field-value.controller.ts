@@ -33,13 +33,13 @@ export class ProductCustomFieldValueController {
   }
 
   @Get(':customFieldId')
-  @docs.getAllProductCustomFieldValueInStore('상품 관련 사용자 정의 필드값 조회')
+  @docs.getAllProductCustomFieldValueInStore('상점내 모든 상품 관련 사용자 정의 필드값 조회')
   getAllProductCustomFieldValueInStore(@Param('customFieldId') customFieldId: string) {
     return this.productCustomFieldValueService.getAllProductCustomFieldValueInStore(customFieldId);
   }
 
   @Patch(':id')
-  @docs.updateProductCustomFieldValue('상품 관련 사용자 정의 필드값 업데이트')
+  @docs.updateProductCustomFieldValue('Id로 상품 관련 사용자 정의 필드값 업데이트')
   updateProductCustomFieldValue(
     @Param('id') id: string,
     @Body() updateProductCustomFieldValueRequestDto: UpdateProductCustomFieldValueRequestDto,
@@ -51,7 +51,7 @@ export class ProductCustomFieldValueController {
   }
 
   @Delete(':id')
-  @docs.deleteProductCustomFieldValue('상품 관련 사용자 정의 필드값 삭제')
+  @docs.deleteProductCustomFieldValue('Id로 상품 관련 사용자 정의 필드값 삭제')
   deleteProductCustomFieldValue(@Param('id') id: string) {
     return this.productCustomFieldValueService.deleteProductCustomFieldValue(id);
   }

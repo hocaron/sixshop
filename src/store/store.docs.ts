@@ -37,7 +37,7 @@ export const docs: SwaggerMethodDoc<StoreController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 상점을 조회합니다.',
+        description: 'Id로 상점을 조회합니다.',
       }),
       ApiOkResponse({
         type: StoreResponseBodyDto,
@@ -52,7 +52,7 @@ export const docs: SwaggerMethodDoc<StoreController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 상점 정보를 업데이트합니다.',
+        description: 'Id로 상점 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
         type: StoreResponseBodyDto,
@@ -67,7 +67,7 @@ export const docs: SwaggerMethodDoc<StoreController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 상점을 삭제합니다.',
+        description: 'Id로 상점을 삭제합니다.',
       }),
       ApiOkResponse({
         type: BaseDeleteResponseBodyDto,

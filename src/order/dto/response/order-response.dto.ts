@@ -17,12 +17,12 @@ export class OrderResponseDto {
   @ApiProperty({example: '10000', description: '주문 총 가격'})
   price: number;
 
-  @ApiProperty({example: 'sixshop', description: '상점 ID'})
+  @ApiProperty({example: 'a1s2d3f4g5', description: '상점 ID'})
   storeId: Store;
 
-  @ApiProperty({example: 'sixshop', description: '고객 ID'})
+  @ApiProperty({example: 'a1s2d3f4g5', description: '고객 ID'})
   customerId: Customer;
 
-  @ApiProperty({example: 'sixshop', description: '상품들 ID'})
+  @ApiProperty({example: '["a1s2d3f4g5", "a1s2d3f4g5"]', description: '상품들 ID'})
   productIds: Product[];
 }

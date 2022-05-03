@@ -2,7 +2,7 @@ import {ApiProperty} from '@nestjs/swagger';
 import {CustomField} from 'src/custom-field/schemas/custom-field.schema';
 
 export class CreateStoreRequestDto {
-  @ApiProperty({example: 'sixshop', description: '상점 이름'})
+  @ApiProperty({example: 'testStore', description: '상점 이름'})
   name: string;
 
   @ApiProperty({example: '["1a2s3d4f"]', description: '고객 관련 사용자 정의 필드 ID'})

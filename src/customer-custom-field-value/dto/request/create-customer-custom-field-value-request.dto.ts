@@ -3,7 +3,10 @@ import {Customer} from 'src/customer/schemas/customer.schema';
 import {CustomField} from '../../../custom-field/schemas/custom-field.schema';
 
 export class CreateCustomerCustomFieldValueRequestDto {
-  @ApiProperty({example: '01012341234', description: '고객 관련 사용자 정의 필드의 값'})
+  @ApiProperty({
+    example: 'testCustomerCustomFieldValue',
+    description: '고객 관련 사용자 정의 필드의 값',
+  })
   value: string;
 
   @ApiProperty({example: '1a2s3d4f', description: '고객 ID'})

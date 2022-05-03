@@ -48,7 +48,7 @@ export const docs: SwaggerMethodDoc<CategoryController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 카테고리 정보를 업데이트합니다.',
+        description: 'Id로 카테고리 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
         type: CategoryResponseBodyDto,
@@ -63,7 +63,7 @@ export const docs: SwaggerMethodDoc<CategoryController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 카테고리를 삭제합니다.',
+        description: 'Id로 카테고리를 삭제합니다.',
       }),
       ApiOkResponse({
         type: BaseDeleteResponseBodyDto,

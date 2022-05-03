@@ -38,7 +38,7 @@ export const docs: SwaggerMethodDoc<CustomFieldController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 사용자 정의 필드를 조회합니다.',
+        description: 'Id로 사용자 정의 필드를 조회합니다.',
       }),
       ApiOkResponse({
         type: CustomFieldResponseBodyDto,
@@ -53,7 +53,7 @@ export const docs: SwaggerMethodDoc<CustomFieldController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 사용자 정의 필드 정보를 업데이트합니다.',
+        description: 'Id로 사용자 정의 필드 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
         type: CustomFieldResponseBodyDto,
@@ -68,7 +68,7 @@ export const docs: SwaggerMethodDoc<CustomFieldController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 사용자 정의 필드를 삭제합니다.',
+        description: 'Id로 사용자 정의 필드를 삭제합니다.',
       }),
       ApiOkResponse({
         type: BaseDeleteResponseBodyDto,

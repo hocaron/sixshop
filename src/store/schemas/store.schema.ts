@@ -7,7 +7,6 @@ export type StoreDocument = Store & Document;
 
 @Schema()
 export class Store {
-  @Prop()
   _id: mongoose.Types.ObjectId;
 
   @Prop({unique: true})
