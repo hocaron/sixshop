@@ -36,7 +36,7 @@ export const docs: SwaggerMethodDoc<CustomerController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 고객 정보를 업데이트합니다.',
+        description: 'Id로 고객 정보를 업데이트합니다.',
       }),
       ApiOkResponse({
         type: CustomerResponseBodyDto,
@@ -51,7 +51,7 @@ export const docs: SwaggerMethodDoc<CustomerController> = {
     return applyDecorators(
       ApiOperation({
         summary,
-        description: 'ID로 고객을 삭제합니다.',
+        description: 'Id로 고객을 삭제합니다.',
       }),
       ApiOkResponse({
         type: BaseDeleteResponseBodyDto,
