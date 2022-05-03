@@ -16,9 +16,6 @@ export class Store {
   customerCustomFieldIds: CustomField[];
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'}]})
-  productCustomFieldIds: CustomField[];
-
-  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CustomField'}]})
   orderCustomFieldIds: CustomField[];
 }
 

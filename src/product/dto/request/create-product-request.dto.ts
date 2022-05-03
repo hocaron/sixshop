@@ -1,6 +1,7 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {Store} from 'src/store/schemas/store.schema';
 import {Category} from 'src/category/schemas/category.schema';
+import {CustomField} from 'src/custom-field/schemas/custom-field.schema';
 
 export class CreateProductRequestDto {
   @ApiProperty({example: 'testProoduct', description: '상품 이름'})
@@ -14,4 +15,7 @@ export class CreateProductRequestDto {
 
   @ApiProperty({example: '["1a2s3d4f"]', description: '카테고리들 ID'})
   categoryIds: Category[];
+
+  @ApiProperty({example: '["1a2s3d4f"]', description: '상품 관련 사용자 정의 필드 ID'})
+  productCustomFieldIds: CustomField[];
 }

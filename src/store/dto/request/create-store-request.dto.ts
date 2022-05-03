@@ -8,9 +8,6 @@ export class CreateStoreRequestDto {
   @ApiProperty({example: '["1a2s3d4f"]', description: '고객 관련 사용자 정의 필드 ID'})
   customerCustomFieldIds: CustomField[];
 
-  @ApiProperty({example: '["1a2s3d4f"]', description: '상품 관련 사용자 정의 필드 ID'})
-  productCustomFieldIds: CustomField[];
-
   @ApiProperty({example: '["1a2s3d4f"]', description: '주문 관련 사용자 정의 필드 ID'})
   orderCustomFieldIds: CustomField[];
 }
