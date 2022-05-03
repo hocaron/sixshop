@@ -77,13 +77,179 @@ $ npm run start
 ### MongoDB 데이터 모델링
 ![image](https://user-images.githubusercontent.com/66551410/166450570-a9762a27-31e7-47f2-b833-9bf8cbecda28.png)
 
-#### 요구사항
+<details>
+<summary>customfields</summary>
+<div markdown="1">
+ 
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 사용자 정의 필드 id
+name | String | 사용자 정의 필드 이름
+fieldType | Enum | 사용자 정의 필드 타입
+arrayValue | Array | 사용자 정의 필드 타입이 array 인 경우 값(사용자 정의 필드를 enum으로 만들고 싶은 경우)
+description | String | 사용자 정의 필드에 대한 설명
+
+```tsx
+export enum FieldType {
+  STRING = 'STRING',
+  NUMBER = 'NUMBER',
+  BOOLEAN = 'BOOLEAN',
+  ARRAY = 'ARRAY',
+  DATE = 'DATE',
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>stores</summary>
+<div markdown="1">
+  
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 상점 Id
+name | String | 상점 이름
+customerCustomFieldIds | ObjectId[] | 고객 관련 사용자 정의 필드 Ids
+orderCustomFieldIds | ObjectId[] | 주문 관련 사용자 정의 필드 Ids
+
+</div>
+</details>
+
+<details>
+<summary>customers</summary>
+<div markdown="1">
+  
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 고객 Id
+name | String | 고객 이름
+email | String | 고객 이메일
+password | String | 고객 비밀번호
+
+</div>
+</details>
+
+<details>
+<summary>customercustomfieldvalues</summary>
+<div markdown="1">
+  
+ <br>
+ 
+  Field | Type | Description
+-- | -- | --
+id | ObjectId | 고객 관련 사용자 정의 필드 값 Id
+value | any | 고객 관련 사용자 정의 필드 값
+customerId | ObjectId | 고객 Id
+customFieldId | ObjectId | 사용자 정의 필드 Id
+ 
+</div>
+</details>
+
+<details>
+<summary>products</summary>
+<div markdown="1">
+  
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 상품 Id
+name | String | 상품 이름
+price | Number | 상품 가격
+storeId | ObjectId | 상점 Id
+categoryIds | ObjectId[] | 카테고리 Ids
+productCustomFieldIds | ObjectId[] | 상품 관련 사용자 정의 필드 Ids
+ 
+</div>
+</details>
+
+<details>
+<summary>productcustomfieldvalues</summary>
+<div markdown="1">
+  
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 상품 관련 사용자 정이 필드 값 Id
+value | any | 상품 관련 사용자 정의 필드 값
+productId | ObjectId | 상품 Id
+customFieldId | ObjectId | 사용자 정의 필드 Id
+ 
+</div>
+</details>
+
+<details>
+<summary>categories</summary>
+<div markdown="1">
+ 
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 카테고리 Id
+name | String | 카테고리 이름
+description | String | 카테고리 설명
+ 
+</div>
+</details>
+
+<details>
+<summary>orders</summary>
+<div markdown="1">
+  
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 주문 Id
+status | Enum | 주문 상태
+price | Number | 주문 가격
+storeId | ObjectId | 상점 Id
+customerId | ObjectId | 고객 Id
+productIds | ObjectId[] | 상품 Ids
+ 
+```tsx
+export enum Status {
+  ORDER = 'ORDER', // 주문 진행
+  CANCEL = 'CANCEL', // 주문 취소
+}
+```
+ 
+</div>
+</details>
+
+<details>
+<summary>ordercustomfieldvalues</summary>
+<div markdown="1">
+  
+ <br>
+ 
+ Field | Type | Description
+-- | -- | --
+id | ObjectId | 주문 관련 사용자 정의 필드 값 Id
+value | any | 주문 관련 사용자 정의 필드 값
+productId | ObjectId | 주문 Id
+customFieldId | ObjectId | 사용자 정의 필드 Id
+ 
+</div>
+</details>
+
+
+## 🖐 요구사항
 ```
 1. 각 상점마다 자신이 소유한 데이터를 확장시킬 수 있는 사용자 정의 필드 기능이 필요합니다.
 2. 각 상점마다 원하는 모델(상품, 고객, 주문)의 사용자 정의 필드는 다를 수 있고, 상점은 사용자 정의 필드를 관리할 수 있어야 합니다.
 ```
-#### 시나리오
-1. 상점A의 경우 고객의 "전화번호", 주문시 "사용하는 기기의 종류" 추가로 입력하고 싶습니다.  
+### 시나리오
+1. 상점A는 고객의 "전화번호", 주문시 "사용하는 기기의 종류" 추가로 입력하고 싶습니다.  
   1.1 사용자 정의 필드를 추가할 수 있는 `CustomField`컬렉션이 있습니다.    
   1.2 `CustomField`컬렉션에 "전화번호", "사용하는 기기의 종류" 에 대한 정보를 save 합니다.  
   1.3 상점 정보를 가지고 있는 `Store`컬렉션의 고객/주문 관련 사용자 정의 필드에 1.2에서 저장한 정보를 업데이트합니다.  
@@ -93,7 +259,7 @@ $ npm run start
   
     API 요청 과정  
     1.2 `Post api/v1/customer-custom-field-values` 요청을 통해 사용자 정의 필드 추가  
-    1.3 `Patch api/v1/stores/{id}` 요청을 통해 고객/주문 관련 사용자 정의 필드을 추가  
+    1.3 `Patch api/v1/stores/{id}` 요청을 통해 고객/주문 관련 사용자 정의 필드를 추가  
     1.4 `Get api/v1/stores/{id}` 요청을 통해 상점에서 고객/주문마다 어떤 사용자 정의 필드를 추가로 받고있는지 조회  
   
 2. 상점A는 상품A에 "도서 발행일"을 추가로 입력하고 싶습니다.  
@@ -104,4 +270,4 @@ $ npm run start
     API 요청 과정  
     2.1 `Post api/v1/customer-custom-field-values` 요청을 통해 사용자 정의 필드 추가  
     2.2 `Get api/v1/products/{id}` 요청을 통해 상품 조회  
-    2.3 `Patch api/v1/products/{id}` 요청을 통해 상품 관련 사용자 정의 필드을 추가    
+    2.3 `Patch api/v1/products/{id}` 요청을 통해 상품 관련 사용자 정의 필드를 추가    
