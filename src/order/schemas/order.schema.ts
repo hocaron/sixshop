@@ -8,8 +8,8 @@ import {Store} from 'src/store/schemas/store.schema';
 export type OrderDocument = Order & Document;
 
 export enum Status {
-  ORDER = 'ORDER',
-  CANCEL = 'CANCEL',
+  ORDER = 'ORDER', // 주문 진행
+  CANCEL = 'CANCEL', // 주문 취소
 }
 
 @Schema()
